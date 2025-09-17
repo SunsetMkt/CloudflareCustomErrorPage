@@ -180,12 +180,12 @@ exports.builderConfig = [
       let POP = "undefined";
       baseDetils.querySelector("ul").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
-          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
+          let check = e.innerText.replace("Error reference number: ", "");
           if (check !== e.innerText) {
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
+          check = e.innerText.replace("Cloudflare Location: ", "");
           if (check !== e.innerText) {
             POP = check;
             return;
@@ -216,16 +216,16 @@ exports.builderConfig = [
       const Explain =
         baseDetils.querySelector("p").innerText +
         document.querySelector("ul").innerText;
-      let ErrorNumber = "5xx";
+      let ErrorNumber = "1xxx";
       let POP = "undefined";
       baseDetils.querySelector("ul.cferror_details").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
-          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
+          let check = e.innerText.replace("Error reference number: ", "");
           if (check !== e.innerText) {
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
+          check = e.innerText.replace("Cloudflare Location: ", "");
           if (check !== e.innerText) {
             POP = check;
             return;
