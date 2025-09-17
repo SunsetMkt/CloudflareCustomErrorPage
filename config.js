@@ -101,19 +101,34 @@ const createHelper = (i18n) => ({
 
 const createFooter = (i18n, includeHit = false) => {
   const footer = [
-    i18n.footer.projectLink,
-    i18n.footer.yourIp,
-    i18n.footer.rayId
+    { key: "footer.projectLink", value: i18n.footer.projectLink },
+    { key: "footer.yourIp", value: i18n.footer.yourIp },
+    { key: "footer.rayId", value: i18n.footer.rayId }
   ];
   if (includeHit) {
-    footer.push(i18n.footer.hitIn);
+    footer.push({ key: "footer.hitIn", value: i18n.footer.hitIn });
   }
   return footer;
+};
+
+// Get the status i18n key from status value
+const getStatusKey = (statusValue) => {
+  const statusMap = {
+    "Working": "working",
+    "Error": "error", 
+    "Unknown": "unknown",
+    "Too Many Requests": "tooManyRequests",
+    "Challenging": "challenging",
+    "Under Attack": "underAttack",
+    "Protected": "protected"
+  };
+  return statusMap[statusValue] || statusValue.toLowerCase().replace(/\s+/g, '');
 };
 
 // Export helper functions for use by app.js
 exports.createHelper = createHelper;
 exports.createFooter = createFooter;
+exports.getStatusKey = getStatusKey;
 
 // Page specifications without language-specific content
 exports.builderConfig = [
