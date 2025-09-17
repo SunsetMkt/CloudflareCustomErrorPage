@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-langs="en-US,zh-CN">
   <%- include('lib/head'); %>
   <body>
+    <!-- Pass all i18n data to the client for language switching -->
+    <script type="application/json" id="i18n-data"><%= JSON.stringify(allI18n) %></script>
+    
     <header>
       <main>
         <%= config.statusCode %>
       </main>
-      <description>
-        <%= config.text %>
+      <description data-i18n="pageText.<%= config.textKey %>" data-i18n-default="<%= allI18n['en-US'].pageText[config.textKey] %>">
+        <%= allI18n['en-US'].pageText[config.textKey] %>
       </description>
     </header>
 
@@ -30,6 +33,7 @@
   </noscript>
 
   <script>
-    (<%- config.script.toString() %>)()
+    const currentI18n = <%= JSON.stringify(allI18n['en-US']) %>;
+    (<%- config.script.toString() %>)(currentI18n)
   </script>
 </html>
