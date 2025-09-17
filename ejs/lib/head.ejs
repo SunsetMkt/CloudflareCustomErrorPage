@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
     rel="stylesheet"
   />
-  <title data-i18n="pageText.<%= config.textKey %>" data-i18n-default="<%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %>"><%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %></title>
+  <title data-i18n="pageText.<%= config.textKey %>"><%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %></title>
   <link
     href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
     rel="stylesheet"
@@ -73,7 +73,8 @@
       // Translate elements with data-i18n attribute
       document.querySelectorAll('[data-i18n]').forEach(function(element) {
         const key = element.getAttribute('data-i18n');
-        const defaultValue = element.getAttribute('data-i18n-default') || element.textContent;
+        // Use English i18n as default instead of data-i18n-default
+        const defaultValue = window.t(key, element.textContent);
         element.innerHTML = window.t(key, defaultValue);
       });
       
@@ -81,7 +82,7 @@
       const titleElement = document.querySelector('title');
       if (titleElement && titleElement.getAttribute('data-i18n')) {
         const titleKey = titleElement.getAttribute('data-i18n');
-        const titleDefault = titleElement.getAttribute('data-i18n-default') || titleElement.textContent;
+        const titleDefault = window.t(titleKey, titleElement.textContent);
         titleElement.textContent = window.t(titleKey, titleDefault);
       }
     });

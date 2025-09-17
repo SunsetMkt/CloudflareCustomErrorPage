@@ -20,8 +20,10 @@ const i18n = {
   // Common footer strings
   footer: {
     projectLink: 'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-    yourIp: "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-    rayId: "Ray ID is <code>::RAY_ID::</code>",
+    yourIpPre: "Your IP is <code> ",
+    yourIpPost: " </code>",
+    rayIdPre: "Ray ID is <code>",
+    rayIdPost: "</code>",
     hitIn: "Hit in <code id=\"pop\"> undefined </code>"
   },
   
