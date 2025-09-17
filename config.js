@@ -21,7 +21,8 @@ const i18n = {
   footer: {
     projectLink: 'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
     yourIp: "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-    rayId: "Ray ID is <code>::RAY_ID::</code>"
+    rayId: "Ray ID is <code>::RAY_ID::</code>",
+    hitIn: "Hit in <code id=\"pop\"> undefined </code>"
   },
   
   // JavaScript parsing strings
@@ -139,7 +140,7 @@ const createFooter = (i18n, includeHit = false) => {
     i18n.footer.rayId
   ];
   if (includeHit) {
-    footer.push('Hit in <code id="pop"> undefined </code>');
+    footer.push(i18n.footer.hitIn);
   }
   return footer;
 };

@@ -21,7 +21,8 @@ const i18n = {
   footer: {
     projectLink: '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
     yourIp: "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
-    rayId: "Ray ID 是 <code>::RAY_ID::</code>"
+    rayId: "Ray ID 是 <code>::RAY_ID::</code>",
+    hitIn: "请求命中到 <code id=\"pop\"> undefined </code>"
   },
   
   // JavaScript parsing strings
@@ -38,7 +39,7 @@ const createFooter = (i18n, includeHit = false) => {
     i18n.footer.rayId
   ];
   if (includeHit) {
-    footer.push('Hit in <code id="pop"> undefined </code>');
+    footer.push(i18n.footer.hitIn);
   }
   return footer;
 };
@@ -172,12 +173,7 @@ exports.builderConfig = [
       explain: "网络服务器汇报了一个错误。",
       howtodo: "请在几分钟后重试。",
     },
-    footer: [
-      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID 是 <code>::RAY_ID::</code>",
-      '请求命中到 <code id="pop"> undefined </code>',
-    ],
+    footer: createFooter(i18n, true),
     script: function () {
       const baseDetils = document.querySelector(".cf-error-details");
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
