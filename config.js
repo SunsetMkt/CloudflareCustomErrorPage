@@ -180,12 +180,12 @@ exports.builderConfig = [
       let POP = "undefined";
       baseDetils.querySelector("ul").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
-          let check = e.innerText.replace("Error reference number: ", "");
+          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
           if (check !== e.innerText) {
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace("Cloudflare Location: ", "");
+          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
           if (check !== e.innerText) {
             POP = check;
             return;
@@ -220,12 +220,12 @@ exports.builderConfig = [
       let POP = "undefined";
       baseDetils.querySelector("ul.cferror_details").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
-          let check = e.innerText.replace("Error reference number: ", "");
+          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
           if (check !== e.innerText) {
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace("Cloudflare Location: ", "");
+          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
           if (check !== e.innerText) {
             POP = check;
             return;
@@ -355,38 +355,5 @@ exports.builderConfig = [
     script: function () {},
   },
 ];
-
-exports.i18n = {
-  client: "Your Client",
-  edgeNetwork: "Cloudflare Edge Network",
-  webServer: "Web Server",
-  provider: "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
-  explain: "What happened?",
-  howtodo: "What can I do?",
-  
-  // Status text internationalization
-  status: {
-    working: "Working",
-    error: "Error", 
-    unknown: "Unknown",
-    tooManyRequests: "Too Many Requests",
-    challenging: "Challenging",
-    underAttack: "Under Attack",
-    protected: "Protected"
-  },
-  
-  // Common footer strings
-  footer: {
-    projectLink: 'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-    yourIp: "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-    rayId: "Ray ID is <code>::RAY_ID::</code>"
-  },
-  
-  // JavaScript parsing strings
-  parsing: {
-    errorRefNumber: "Error reference number: ",
-    cloudflareLocation: "Cloudflare Location: "
-  }
-};
 
 exports.i18n = i18n;

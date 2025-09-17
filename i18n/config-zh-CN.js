@@ -218,7 +218,7 @@ exports.builderConfig = [
       const Explain =
         baseDetils.querySelector("p").innerText +
         document.querySelector("ul").innerText;
-      let ErrorNumber = "5xx";
+      let ErrorNumber = "1xxx";
       let POP = "undefined";
       baseDetils.querySelector("ul.cferror_details").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {

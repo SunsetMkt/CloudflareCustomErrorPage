@@ -13,22 +13,30 @@ const allI18n = {
   'zh-CN': configs[1].i18n
 };
 
-// Use the English configuration as the base template structure
-const baseConfig = configs[0];
-
-baseConfig.builderConfig.forEach((item) => {
-  let html = ejs.render(
-    fs.readFileSync("./ejs/index.ejs", { encoding: "utf8" }),
-    {
-      config: item,
-      i18n: baseConfig.i18n, // Use English as default
-      allI18n: allI18n, // Pass all i18n configs
-      helper: {},
-    },
-    {
-      root: "./ejs/index.ejs",
-      filename: "./ejs/index.ejs",
-    },
-  );
-  fs.writeFileSync(`./public/${item.fileName}`, html, { encoding: "utf8" });
+// Process all configurations
+configs.forEach((config, index) => {
+  config.builderConfig.forEach((item) => {
+    let html = ejs.render(
+      fs.readFileSync("./ejs/index.ejs", { encoding: "utf8" }),
+      {
+        config: item,
+        i18n: config.i18n, // Use the appropriate i18n for this config
+        allI18n: allI18n, // Pass all i18n configs
+        helper: {},
+      },
+      {
+        root: "./ejs/index.ejs",
+        filename: "./ejs/index.ejs",
+      },
+    );
+    
+    // Create directory if it doesn't exist
+    const filePath = `./public/${item.fileName}`;
+    const dirPath = filePath.substring(0, filePath.lastIndexOf('/'));
+    if (dirPath && !fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+    
+    fs.writeFileSync(filePath, html, { encoding: "utf8" });
+  });
 });
