@@ -155,9 +155,8 @@ exports.builderConfig = [
       document.querySelector("header description").innerText = ErrorMessage;
       document.querySelector("explain p").innerText = Explain;
       document.querySelector("text #pop").innerText = POP;
-      document.querySelector(
-        "title"
-      ).innerText = `${ErrorNumber} | ${ErrorMessage}`;
+      document.querySelector("title").innerText =
+        `${ErrorNumber} | ${ErrorMessage}`;
     },
   },
   {
@@ -199,9 +198,8 @@ exports.builderConfig = [
       document.querySelector("header main").innerText = ErrorNumber;
       document.querySelector("header description").innerText = ErrorMessage;
       document.querySelector("explain p").innerText = Explain;
-      document.querySelector(
-        "title"
-      ).innerText = `${ErrorNumber} | ${ErrorMessage}`;
+      document.querySelector("title").innerText =
+        `${ErrorNumber} | ${ErrorMessage}`;
     },
   },
   {
@@ -263,7 +261,8 @@ exports.builderConfig = [
     card: helper.edgeBanned,
     reason: {
       explain: "Your country or region has been banned by the website owner.",
-      howtodo: "Contact the website owner to request access from your location.",
+      howtodo:
+        "Contact the website owner to request access from your location.",
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
@@ -342,8 +341,10 @@ exports.builderConfig = [
     text: "JavaScript challenge",
     card: helper.underAttack,
     reason: {
-      explain: "This website is using a security service to protect itself from online attacks.",
-      howtodo: "Please enable JavaScript and wait while we verify your browser.",
+      explain:
+        "This website is using a security service to protect itself from online attacks.",
+      howtodo:
+        "Please enable JavaScript and wait while we verify your browser.",
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
@@ -358,8 +359,7 @@ exports.i18n = {
   client: "Your Client",
   edgeNetwork: "Cloudflare Edge Network",
   webServer: "Web Server",
-  provider:
-    "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
+  provider: "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
   explain: "What happened?",
   howtodo: "What can I do?",
 };

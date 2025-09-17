@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%- include('lib/head'); %>
+  <body>
+    <header>
+      <main>
+        <%= config.statusCode %>
+      </main>
+      <description>
+        <%= config.text %>
+      </description>
+    </header>
 
-<%- include('lib/head'); %>
-<body>
+    <%- include('lib/card') -%>
+    <%- include('lib/reason') -%>
 
-        <header>
-            <main>
-                <%= config.statusCode %>
-            </main>
-            <description>
-                <%= config.text %>
-            </description>
-        </header>
+    <% if (config.statusCode === 1010 || config.statusCode === 1011 || config.statusCode === 1013 || config.statusCode === 1016) { %>
+    <div class="challenge-container">::CAPTCHA_BOX::</div>
+    <% } else if (config.statusCode === 1012) { %>
+    <div class="challenge-container">::IM_UNDER_ATTACK_BOX::</div>
+    <% } %>
+  </body>
 
-        <%- include('lib/card') -%>
-        <%- include('lib/reason') -%>
+  <%- include('lib/footer') -%>
 
-        <% if (config.statusCode === 1010 || config.statusCode === 1011 || config.statusCode === 1013 || config.statusCode === 1016) { %>
-        <div class="challenge-container">
-            ::CAPTCHA_BOX::
-        </div>
-        <% } else if (config.statusCode === 1012) { %>
-        <div class="challenge-container">
-            ::IM_UNDER_ATTACK_BOX::
-        </div>
-        <% } %>
-</body>
+  <none> ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX:: </none>
 
-<%- include('lib/footer') -%>
-
-<none>
-::CLOUDFLARE_ERROR_1000S_BOX::
-::CLOUDFLARE_ERROR_500S_BOX::
-</none>
-
-<script>
+  <script>
     (<%- config.script.toString() %>)()
-</script>
-
+  </script>
 </html>

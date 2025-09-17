@@ -155,9 +155,8 @@ exports.builderConfig = [
       document.querySelector("header description").innerText = ErrorMessage;
       document.querySelector("explain p").innerText = Explain;
       document.querySelector("text #pop").innerText = POP;
-      document.querySelector(
-        "title"
-      ).innerText = `${ErrorNumber} | ${ErrorMessage}`;
+      document.querySelector("title").innerText =
+        `${ErrorNumber} | ${ErrorMessage}`;
     },
   },
   {
@@ -199,9 +198,8 @@ exports.builderConfig = [
       document.querySelector("header main").innerText = ErrorNumber;
       document.querySelector("header description").innerText = ErrorMessage;
       document.querySelector("explain p").innerText = Explain;
-      document.querySelector(
-        "title"
-      ).innerText = `${ErrorNumber} | ${ErrorMessage}`;
+      document.querySelector("title").innerText =
+        `${ErrorNumber} | ${ErrorMessage}`;
     },
   },
   {

@@ -13,8 +13,8 @@ configs.forEach((config) =>
       {
         root: "./ejs/index.ejs",
         filename: "./ejs/index.ejs",
-      }
+      },
     );
     fs.writeFileSync(`./public/${item.fileName}`, html, { encoding: "utf8" });
-  })
+  }),
 );
