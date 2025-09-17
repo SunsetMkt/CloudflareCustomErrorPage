@@ -20,6 +20,34 @@
     rel="stylesheet"
   />
   <link href="index.css" rel="stylesheet" />
+  <script>
+    // Client-side i18n support
+    window.i18n = <%- JSON.stringify(i18n) %>;
+    
+    // Simple translation function
+    window.t = function(key, defaultValue) {
+      const keys = key.split('.');
+      let value = window.i18n;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return defaultValue || key;
+        }
+      }
+      return value || defaultValue || key;
+    };
+    
+    // Apply translations on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      // Translate elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(function(element) {
+        const key = element.getAttribute('data-i18n');
+        const defaultValue = element.textContent;
+        element.innerHTML = window.t(key, defaultValue);
+      });
+    });
+  </script>
   <script defer>
     document.head.innerHTML += `<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">`;
   </script>
