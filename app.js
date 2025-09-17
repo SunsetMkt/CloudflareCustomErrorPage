@@ -1,5 +1,5 @@
 const ejs = require("ejs");
-const configs = [require("./config.js"), require("./i18n/config-zh-CN.js")];
+const configs = [require("./config.js")];
 const fs = require("fs");
 
 if (!fs.existsSync("./public")) {
