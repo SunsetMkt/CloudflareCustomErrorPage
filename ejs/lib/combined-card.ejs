@@ -1,0 +1,40 @@
+<status>
+  <card class="<%= config.card.client.color %>-card" id="client-status-card">
+    <icon class="material-icons-outlined <%= config.card.client.color %>-text"
+      >web_assets</icon
+    >
+    <main data-lang-en="<%= i18n.en.client %>" data-lang-zh="<%= i18n.zh.client %>"><%= i18n.en.client %></main>
+    <status-text class="<%= config.card.client.color %>-text" 
+      data-lang-en="<%= typeof config.card.client.status === 'object' ? config.card.client.status.en || 'Working' : config.card.client.status %>" 
+      data-lang-zh="<%= typeof config.card.client.status === 'object' ? config.card.client.status.zh || '正常' : (config.card.client.status === 'Working' ? '正常' : config.card.client.status === 'Too Many Requests' ? '请求过多' : config.card.client.status === 'Challenging' ? '验证中' : config.card.client.status === 'Under Attack' ? '受攻击' : config.card.client.status) %>"
+      ><%= typeof config.card.client.status === 'object' ? config.card.client.status.en || 'Working' : config.card.client.status %></status-text
+    >
+  </card>
+  <card
+    class="<%= config.card.edgeNetwork.color %>-card"
+    id="client-status-card"
+  >
+    <icon
+      class="material-icons-outlined <%= config.card.edgeNetwork.color %>-text"
+      >cloud</icon
+    >
+    <main data-lang-en="<%= i18n.en.edgeNetwork %>" data-lang-zh="<%= i18n.zh.edgeNetwork %>"><%= i18n.en.edgeNetwork %></main>
+    <status-text class="<%= config.card.edgeNetwork.color %>-text"
+      data-lang-en="<%= typeof config.card.edgeNetwork.status === 'object' ? config.card.edgeNetwork.status.en || 'Working' : config.card.edgeNetwork.status %>" 
+      data-lang-zh="<%= typeof config.card.edgeNetwork.status === 'object' ? config.card.edgeNetwork.status.zh || '运行' : (config.card.edgeNetwork.status === 'Working' ? '运行' : config.card.edgeNetwork.status === 'Error' ? '错误' : config.card.edgeNetwork.status === 'Unknown' ? '未知' : config.card.edgeNetwork.status) %>"
+      ><%= typeof config.card.edgeNetwork.status === 'object' ? config.card.edgeNetwork.status.en || 'Working' : config.card.edgeNetwork.status %></status-text
+    >
+  </card>
+  <card class="<%= config.card.webServer.color %>-card" id="client-status-card">
+    <icon
+      class="material-icons-outlined <%= config.card.webServer.color %>-text"
+      >dns</icon
+    >
+    <main data-lang-en="<%= i18n.en.webServer %>" data-lang-zh="<%= i18n.zh.webServer %>"><%= i18n.en.webServer %></main>
+    <status-text class="<%= config.card.webServer.color %>-text"
+      data-lang-en="<%= typeof config.card.webServer.status === 'object' ? config.card.webServer.status.en || 'Unknown' : config.card.webServer.status %>" 
+      data-lang-zh="<%= typeof config.card.webServer.status === 'object' ? config.card.webServer.status.zh || '未知' : (config.card.webServer.status === 'Working' ? '运行' : config.card.webServer.status === 'Error' ? '错误' : config.card.webServer.status === 'Unknown' ? '未知' : config.card.webServer.status === 'Protected' ? '保护中' : config.card.webServer.status) %>"
+      ><%= typeof config.card.webServer.status === 'object' ? config.card.webServer.status.en || 'Unknown' : config.card.webServer.status %></status-text
+    >
+  </card>
+</status>

@@ -1,0 +1,12 @@
+<footer>
+  <provider data-lang-en="<%= i18n.en.provider %>" data-lang-zh="<%= i18n.zh.provider %>"><%- i18n.en.provider %></provider>
+  <br />
+  <text>
+    <%const footerTexts = typeof config.footer === 'object' ? config.footer.en : config.footer; %>
+    <%const footerTextsZh = typeof config.footer === 'object' ? config.footer.zh : config.footer; %>
+    <%for(let x = 0; x < footerTexts.length; x++) {%>
+    <span data-lang-en="<%= footerTexts[x] %>" data-lang-zh="<%= footerTextsZh && footerTextsZh[x] ? footerTextsZh[x] : footerTexts[x] %>"><%- footerTexts[x] %></span>
+    <br />
+    <%}%>
+  </text>
+</footer>

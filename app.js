@@ -1,5 +1,5 @@
 const ejs = require("ejs");
-const configs = [require("./config.js"), require("./i18n/config-zh-CN.js")];
+const config = require("./combined-config.js");
 const fs = require("fs");
 
 if (!fs.existsSync("./public")) {
@@ -7,20 +7,22 @@ if (!fs.existsSync("./public")) {
 }
 fs.copyFileSync("./index.css", "./public/index.css");
 
-configs.forEach((config) =>
-  config.builderConfig.map((item) => {
-    let html = ejs.render(
-      fs.readFileSync("./ejs/index.ejs", { encoding: "utf8" }),
-      {
-        config: item,
-        i18n: config.i18n,
-        helper: {},
-      },
-      {
-        root: "./ejs/index.ejs",
-        filename: "./ejs/index.ejs",
-      },
-    );
-    fs.writeFileSync(`./public/${item.fileName}`, html, { encoding: "utf8" });
-  }),
-);
+// Generate one set of multilingual pages
+config.builderConfig.map((item) => {
+  let html = ejs.render(
+    fs.readFileSync("./ejs/combined-index.ejs", { encoding: "utf8" }),
+    {
+      config: item,
+      i18n: config.i18n,
+      helper: {},
+    },
+    {
+      root: "./ejs/combined-index.ejs",
+      filename: "./ejs/combined-index.ejs",
+    },
+  );
+  fs.writeFileSync(`./public/${item.fileName}`, html, { encoding: "utf8" });
+});
+
+console.log("Build completed successfully!");
+console.log(`Generated ${config.builderConfig.length} multilingual pages in ./public/`);

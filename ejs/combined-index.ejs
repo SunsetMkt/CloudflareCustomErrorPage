@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('lib/combined-head'); %>
+  <body data-lang="en">
+    <div id="language-switcher" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+      <button onclick="switchLanguage('en')" id="lang-en" class="lang-btn active">EN</button>
+      <button onclick="switchLanguage('zh')" id="lang-zh" class="lang-btn">中</button>
+    </div>
+    
+    <header>
+      <main>
+        <%= config.statusCode %>
+      </main>
+      <description data-lang-en="<%= typeof config.text === 'object' ? config.text.en : config.text %>" data-lang-zh="<%= typeof config.text === 'object' ? config.text.zh : config.text %>">
+        <%= typeof config.text === 'object' ? config.text.en : config.text %>
+      </description>
+    </header>
+
+    <%- include('lib/combined-card') -%>
+    <%- include('lib/combined-reason') -%>
+
+    <% if (config.statusCode === 403) { %>
+    <div class="challenge-container">::CAPTCHA_BOX::</div>
+    <% } else if (config.fileName === "js-challenge.html") { %>
+    <div class="challenge-container">::IM_UNDER_ATTACK_BOX::</div>
+    <% } %>
+  </body>
+
+  <%- include('lib/combined-footer') -%>
+
+  <none> ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX:: </none>
+
+  <noscript>
+    ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX::
+  </noscript>
+
+  <script>
+    // Language switching functionality
+    function switchLanguage(lang) {
+      const body = document.body;
+      body.setAttribute('data-lang', lang);
+      
+      // Update active language button
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('active');
+      
+      // Update all elements with language data
+      document.querySelectorAll('[data-lang-en][data-lang-zh]').forEach(element => {
+        element.innerHTML = element.getAttribute('data-lang-' + lang);
+      });
+      
+      // Store language preference
+      localStorage.setItem('preferred-language', lang);
+    }
+
+    // IP reveal functionality
+    function setupIPReveal() {
+      document.querySelectorAll('.ip-container').forEach(container => {
+        container.addEventListener('click', function() {
+          const hidden = container.querySelector('.ip-hidden');
+          const shown = container.querySelector('.ip-shown');
+          
+          if (hidden.style.display !== 'none') {
+            hidden.style.display = 'none';
+            shown.style.display = 'inline';
+          } else {
+            hidden.style.display = 'inline';
+            shown.style.display = 'none';
+          }
+        });
+        
+        // Make it look clickable
+        container.style.cursor = 'pointer';
+        container.style.textDecoration = 'underline';
+        container.title = 'Click to toggle IP visibility';
+      });
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved language preference
+      const savedLang = localStorage.getItem('preferred-language') || 'en';
+      switchLanguage(savedLang);
+      
+      // Setup IP reveal functionality
+      setupIPReveal();
+    });
+
+    // Original page script
+    (<%- config.script.toString() %>)()
+  </script>
+  
+  <style>
+    .lang-btn {
+      background: #ff8c00;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      margin: 0 2px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .lang-btn.active {
+      background: #ff6c00;
+      font-weight: bold;
+    }
+    .lang-btn:hover {
+      background: #ff5c00;
+    }
+    .ip-container {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .ip-container:hover {
+      background: rgba(255, 140, 0, 0.1);
+    }
+  </style>
+</html>
