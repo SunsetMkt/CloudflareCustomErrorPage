@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta name="backend-renderer" content="ejs" />
+    <meta name="custom-page" content="186526/CloudflareCustomErrorPage" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <title><%= config.statusCode %> | <%= config.text %></title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <link href="index.css" rel="stylesheet" />
+    <style>
+      .lang-switcher {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+      }
+      .lang-switcher button {
+        background: none;
+        border: none;
+        padding: 5px 10px;
+        margin: 0 2px;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 14px;
+      }
+      .lang-switcher button.active {
+        background: #007bff;
+        color: white;
+      }
+      .lang-switcher button:hover {
+        background: #e9ecef;
+      }
+      .lang-switcher button.active:hover {
+        background: #0056b3;
+      }
+      
+      .ip-revealer {
+        cursor: pointer;
+        background: #f8f9fa;
+        border: 1px dashed #ccc;
+        padding: 2px 6px;
+        border-radius: 3px;
+        user-select: none;
+      }
+      .ip-revealer:hover {
+        background: #e9ecef;
+      }
+      .ip-revealer.revealed {
+        background: transparent;
+        border: none;
+        cursor: default;
+      }
+      
+      [data-lang]:not(.active) {
+        display: none;
+      }
+    </style>
+    <script>
+      // Multi-language i18n support - include all languages
+      window.allI18n = {
+        'en': <%- JSON.stringify(allI18n.en) %>,
+        'zh-CN': <%- JSON.stringify(allI18n['zh-CN']) %>
+      };
+      
+      // Current language
+      window.currentLang = 'en';
+      
+      // Translation function for current language
+      window.t = function(key, defaultValue) {
+        const keys = key.split('.');
+        let value = window.allI18n[window.currentLang];
+        for (const k of keys) {
+          if (value && typeof value === 'object' && k in value) {
+            value = value[k];
+          } else {
+            return defaultValue || key;
+          }
+        }
+        return value || defaultValue || key;
+      };
+      
+      // Switch language function
+      window.switchLang = function(lang) {
+        window.currentLang = lang;
+        
+        // Update active language elements
+        document.querySelectorAll('[data-lang]').forEach(function(element) {
+          element.classList.toggle('active', element.getAttribute('data-lang') === lang);
+        });
+        
+        // Update language switcher buttons
+        document.querySelectorAll('.lang-switcher button').forEach(function(button) {
+          button.classList.toggle('active', button.getAttribute('data-lang') === lang);
+        });
+        
+        // Update HTML lang attribute
+        document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+      };
+      
+      // IP reveal function
+      window.revealIP = function(element) {
+        if (element.classList.contains('revealed')) return;
+        
+        element.classList.add('revealed');
+        element.style.cursor = 'default';
+        // Note: In actual Cloudflare environment, ::CLIENT_IP:: would be replaced
+        // For demo purposes, we'll show placeholder
+        element.innerHTML = element.innerHTML;
+      };
+      
+      // Initialize on page load
+      window.addEventListener('DOMContentLoaded', function() {
+        // Set default language to English
+        switchLang('en');
+        
+        // Add click handlers to IP revealers
+        document.querySelectorAll('.ip-revealer').forEach(function(element) {
+          element.addEventListener('click', function() {
+            revealIP(this);
+          });
+        });
+      });
+    </script>
+    <script defer>
+      document.head.innerHTML += `<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">`;
+    </script>
+  </head>
+
+  <body>
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+      <button data-lang="en" onclick="switchLang('en')">English</button>
+      <button data-lang="zh-CN" onclick="switchLang('zh-CN')">中文</button>
+    </div>
+
+    <header>
+      <main>
+        <%= config.statusCode %>
+      </main>
+      <description>
+        <span data-lang="en"><%= config.text %></span>
+        <span data-lang="zh-CN"><%= config.textZh %></span>
+      </description>
+    </header>
+
+    <!-- Status Cards - English -->
+    <status data-lang="en">
+      <card class="<%= config.card.client.color %>-card" id="client-status-card">
+        <icon class="material-icons-outlined <%= config.card.client.color %>-text">web_assets</icon>
+        <main><%= allI18n.en.client %></main>
+        <status-text class="<%= config.card.client.color %>-text"><%= config.card.client.status %></status-text>
+      </card>
+      <card class="<%= config.card.edgeNetwork.color %>-card" id="client-status-card">
+        <icon class="material-icons-outlined <%= config.card.edgeNetwork.color %>-text">cloud</icon>
+        <main><%= allI18n.en.edgeNetwork %></main>
+        <status-text class="<%= config.card.edgeNetwork.color %>-text"><%= config.card.edgeNetwork.status %></status-text>
+      </card>
+      <card class="<%= config.card.webServer.color %>-card" id="client-status-card">
+        <icon class="material-icons-outlined <%= config.card.webServer.color %>-text">dns</icon>
+        <main><%= allI18n.en.webServer %></main>
+        <status-text class="<%= config.card.webServer.color %>-text"><%= config.card.webServer.status %></status-text>
+      </card>
+    </status>
+
+    <!-- Status Cards - Chinese -->
+    <status data-lang="zh-CN">
+      <card class="<%= config.cardZh.client.color %>-card" id="client-status-card">
+        <icon class="material-icons-outlined <%= config.cardZh.client.color %>-text">web_assets</icon>
+        <main><%= allI18n['zh-CN'].client %></main>
+        <status-text class="<%= config.cardZh.client.color %>-text"><%= config.cardZh.client.status %></status-text>
+      </card>
+      <card class="<%= config.cardZh.edgeNetwork.color %>-card" id="client-status-card">
+        <icon class="material-icons-outlined <%= config.cardZh.edgeNetwork.color %>-text">cloud</icon>
+        <main><%= allI18n['zh-CN'].edgeNetwork %></main>
+        <status-text class="<%= config.cardZh.edgeNetwork.color %>-text"><%= config.cardZh.edgeNetwork.status %></status-text>
+      </card>
+      <card class="<%= config.cardZh.webServer.color %>-card" id="client-status-card">
+        <icon class="material-icons-outlined <%= config.cardZh.webServer.color %>-text">dns</icon>
+        <main><%= allI18n['zh-CN'].webServer %></main>
+        <status-text class="<%= config.cardZh.webServer.color %>-text"><%= config.cardZh.webServer.status %></status-text>
+      </card>
+    </status>
+
+    <!-- Reason Section - English -->
+    <reason data-lang="en">
+      <explain>
+        <main>
+          <%= allI18n.en.explain %>
+        </main>
+        <p><%- config.reason.explain %></p>
+      </explain>
+      <howtodo>
+        <main>
+          <%= allI18n.en.howtodo %>
+        </main>
+        <p><%- config.reason.howtodo %></p>
+      </howtodo>
+    </reason>
+
+    <!-- Reason Section - Chinese -->  
+    <reason data-lang="zh-CN">
+      <explain>
+        <main>
+          <%= allI18n['zh-CN'].explain %>
+        </main>
+        <p><%- config.reasonZh.explain %></p>
+      </explain>
+      <howtodo>
+        <main>
+          <%= allI18n['zh-CN'].howtodo %>
+        </main>
+        <p><%- config.reasonZh.howtodo %></p>
+      </howtodo>
+    </reason>
+
+    <% if (config.statusCode === 403) { %>
+    <div class="challenge-container">::CAPTCHA_BOX::</div>
+    <% } else if (config.fileName && config.fileName.includes("js-challenge")) { %>
+    <div class="challenge-container">::IM_UNDER_ATTACK_BOX::</div>
+    <% } %>
+  </body>
+
+  <!-- Footer - English -->
+  <footer data-lang="en">
+    <provider><%- allI18n.en.provider %></provider>
+    <br />
+    <text>
+      <%- allI18n.en.footer.projectLink %>
+      <br />
+      <span class="ip-revealer" onclick="revealIP(this)" title="Click to reveal IP">
+        <%- allI18n.en.footer.yourIp %>
+      </span>
+      <br />
+      <%- allI18n.en.footer.rayId %>
+      <br />
+    </text>
+  </footer>
+
+  <!-- Footer - Chinese -->
+  <footer data-lang="zh-CN">
+    <provider><%- allI18n['zh-CN'].provider %></provider>
+    <br />
+    <text>
+      <%- allI18n['zh-CN'].footer.projectLink %>
+      <br />
+      <span class="ip-revealer" onclick="revealIP(this)" title="点击显示 IP">
+        <%- allI18n['zh-CN'].footer.yourIp %>
+      </span>
+      <br />
+      <%- allI18n['zh-CN'].footer.rayId %>
+      <br />
+    </text>
+  </footer>
+
+  <none> ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX:: </none>
+
+  <noscript>
+    ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX::
+  </noscript>
+
+  <script>
+    (<%- config.script.toString() %>)()
+  </script>
+</html>
