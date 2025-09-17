@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
         rel="stylesheet"/>
-    <title>1006 | Your IP address has been banned</title>
+    <title>1016 | 交互式验证挑战</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
     <link href="/index.css" rel="stylesheet"/>
     <script defer>
@@ -24,58 +24,62 @@
 
         <header>
             <main>
-                1006
+                1016
             </main>
             <description>
-                Your IP address has been banned
+                交互式验证挑战
             </description>
         </header>
 
         <status>
-    <card class="green-card" id="client-status-card">
-        <icon class="material-icons-outlined green-text">web_assets</icon>
-        <main>Your Client</main>
-        <status-text class="green-text">Working</status-text>
+    <card class="yellow-card" id="client-status-card">
+        <icon class="material-icons-outlined yellow-text">web_assets</icon>
+        <main>您所运行的客户端</main>
+        <status-text class="yellow-text">验证中</status-text>
     </card>
     <card class="green-card" id="client-status-card">
         <icon class="material-icons-outlined green-text">cloud</icon>
-        <main>Cloudflare Edge Network</main>
-        <status-text class="green-text">Working</status-text>
+        <main>Cloudflare 边缘网络</main>
+        <status-text class="green-text">运行</status-text>
     </card>
     <card class="yellow-card" id="client-status-card">
         <icon class="material-icons-outlined yellow-text">dns</icon>
-        <main>Web Server</main>
-        <status-text class="yellow-text">Unknown</status-text>
+        <main>该站点服务器</main>
+        <status-text class="yellow-text">未知</status-text>
     </card>
 </status>        <reason>
     <explain>
         <main>
-            What happened?
+            发生了什么？
         </main>
-        <p>Request the website owner to investigate their Cloudflare security settings or allow your client IP address. Since the website owner blocked your request, Cloudflare support cannot override a customer’s security settings.</p>
+        <p>完成交互式验证以继续访问。</p>
     </explain>
     <howtodo>
         <main>
-            What can I do?
+            我该做什么？
         </main>
-        <p>Provide the website owner with a screenshot of the 1006 error message you received.</p>
+        <p>解决下方的验证挑战以访问网站。</p>
     </howtodo>
 </reason>
+        
+        <div class="challenge-container">
+            ::CAPTCHA_BOX::
+        </div>
         
 </body>
 
 <footer>
-    <provider>Running with <a href='https://cloudflare.com'>Cloudflare</a>.</provider>
+    <provider>与 <a href='https://cloudflare.com'>Cloudflare</a> 一同运行。</provider>
     <br>
     <text>
         
-            From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.
+            来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目
             <br>
         
-            Your IP is <code> ::CLIENT_IP:: </code>
+            您的 IP 是 <code> ::CLIENT_IP:: </code>
             <br>
         
-            Ray ID is <code>::RAY_ID::</code>
+            Ray ID 是 <code>::RAY_ID::</code>
             <br>
         
     </text>

@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
         rel="stylesheet"/>
-    <title>1006 | Your IP address has been banned</title>
+    <title>1016 | Interactive challenge</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
     <link href="/index.css" rel="stylesheet"/>
     <script defer>
@@ -24,18 +24,18 @@
 
         <header>
             <main>
-                1006
+                1016
             </main>
             <description>
-                Your IP address has been banned
+                Interactive challenge
             </description>
         </header>
 
         <status>
-    <card class="green-card" id="client-status-card">
-        <icon class="material-icons-outlined green-text">web_assets</icon>
+    <card class="yellow-card" id="client-status-card">
+        <icon class="material-icons-outlined yellow-text">web_assets</icon>
         <main>Your Client</main>
-        <status-text class="green-text">Working</status-text>
+        <status-text class="yellow-text">Challenging</status-text>
     </card>
     <card class="green-card" id="client-status-card">
         <icon class="material-icons-outlined green-text">cloud</icon>
@@ -52,15 +52,19 @@
         <main>
             What happened?
         </main>
-        <p>Request the website owner to investigate their Cloudflare security settings or allow your client IP address. Since the website owner blocked your request, Cloudflare support cannot override a customer’s security settings.</p>
+        <p>Complete an interactive challenge to continue.</p>
     </explain>
     <howtodo>
         <main>
             What can I do?
         </main>
-        <p>Provide the website owner with a screenshot of the 1006 error message you received.</p>
+        <p>Solve the challenge presented below to access the website.</p>
     </howtodo>
 </reason>
+        
+        <div class="challenge-container">
+            ::CAPTCHA_BOX::
+        </div>
         
 </body>
 

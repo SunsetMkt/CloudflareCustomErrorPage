@@ -15,6 +15,16 @@
 
         <%- include('lib/card') -%>
         <%- include('lib/reason') -%>
+
+        <% if (config.statusCode === 1010 || config.statusCode === 1011 || config.statusCode === 1013 || config.statusCode === 1016) { %>
+        <div class="challenge-container">
+            ::CAPTCHA_BOX::
+        </div>
+        <% } else if (config.statusCode === 1012) { %>
+        <div class="challenge-container">
+            ::IM_UNDER_ATTACK_BOX::
+        </div>
+        <% } %>
 </body>
 
 <%- include('lib/footer') -%>
