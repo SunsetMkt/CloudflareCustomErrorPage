@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
     rel="stylesheet"
   />
-  <title><%= config.statusCode %> | <%= config.text %></title>
+  <title data-i18n="pageText.<%= config.textKey %>" data-i18n-default="<%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %>"><%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %></title>
   <link
     href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
     rel="stylesheet"
