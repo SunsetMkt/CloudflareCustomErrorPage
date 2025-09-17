@@ -9,8 +9,8 @@ fs.copyFileSync("./index.css", "./public/index.css");
 
 // Collect all i18n configurations
 const allI18n = {
-  'en': configs[0].i18n,
-  'zh-CN': configs[1].i18n
+  en: configs[0].i18n,
+  "zh-CN": configs[1].i18n,
 };
 
 // Process all configurations
@@ -29,14 +29,14 @@ configs.forEach((config, index) => {
         filename: "./ejs/index.ejs",
       },
     );
-    
+
     // Create directory if it doesn't exist
     const filePath = `./public/${item.fileName}`;
-    const dirPath = filePath.substring(0, filePath.lastIndexOf('/'));
+    const dirPath = filePath.substring(0, filePath.lastIndexOf("/"));
     if (dirPath && !fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
     }
-    
+
     fs.writeFileSync(filePath, html, { encoding: "utf8" });
   });
 });

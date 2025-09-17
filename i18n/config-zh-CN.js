@@ -5,38 +5,39 @@ const i18n = {
   provider: "与 <a href='https://cloudflare.com'>Cloudflare</a> 一同运行。",
   explain: "发生了什么？",
   howtodo: "我该做什么？",
-  
+
   // Status text internationalization
   status: {
     working: "正常",
-    error: "错误", 
+    error: "错误",
     unknown: "未知",
     tooManyRequests: "请求过多",
     challenging: "验证中",
     underAttack: "攻击防护",
-    protected: "保护中"
+    protected: "保护中",
   },
-  
+
   // Common footer strings
   footer: {
-    projectLink: '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+    projectLink:
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
     yourIp: "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
     rayId: "Ray ID 是 <code>::RAY_ID::</code>",
-    hitIn: "请求命中到 <code id=\"pop\"> undefined </code>"
+    hitIn: '请求命中到 <code id="pop"> undefined </code>',
   },
-  
+
   // JavaScript parsing strings
   parsing: {
     errorRefNumber: "Error reference number: ",
-    cloudflareLocation: "Cloudflare Location: "
-  }
+    cloudflareLocation: "Cloudflare Location: ",
+  },
 };
 
 const createFooter = (i18n, includeHit = false) => {
   const footer = [
     i18n.footer.projectLink,
     i18n.footer.yourIp,
-    i18n.footer.rayId
+    i18n.footer.rayId,
   ];
   if (includeHit) {
     footer.push(i18n.footer.hitIn);

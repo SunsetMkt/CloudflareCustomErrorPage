@@ -5,31 +5,32 @@ const i18n = {
   provider: "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
   explain: "What happened?",
   howtodo: "What can I do?",
-  
+
   // Status text internationalization
   status: {
     working: "Working",
-    error: "Error", 
+    error: "Error",
     unknown: "Unknown",
     tooManyRequests: "Too Many Requests",
     challenging: "Challenging",
     underAttack: "Under Attack",
-    protected: "Protected"
+    protected: "Protected",
   },
-  
+
   // Common footer strings
   footer: {
-    projectLink: 'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+    projectLink:
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
     yourIp: "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
     rayId: "Ray ID is <code>::RAY_ID::</code>",
-    hitIn: "Hit in <code id=\"pop\"> undefined </code>"
+    hitIn: 'Hit in <code id="pop"> undefined </code>',
   },
-  
+
   // JavaScript parsing strings
   parsing: {
     errorRefNumber: "Error reference number: ",
-    cloudflareLocation: "Cloudflare Location: "
-  }
+    cloudflareLocation: "Cloudflare Location: ",
+  },
 };
 
 const createHelper = (i18n) => ({
@@ -137,7 +138,7 @@ const createFooter = (i18n, includeHit = false) => {
   const footer = [
     i18n.footer.projectLink,
     i18n.footer.yourIp,
-    i18n.footer.rayId
+    i18n.footer.rayId,
   ];
   if (includeHit) {
     footer.push(i18n.footer.hitIn);
