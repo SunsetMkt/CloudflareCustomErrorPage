@@ -2,13 +2,33 @@
   <provider data-i18n="provider"><%- i18n.provider %></provider>
   <br />
   <text>
-    <%for(footerItem of config.footer ) {%>
-      <% if (footerItem.type === 'placeholder') { %>
-        <span data-i18n="<%= footerItem.prePart.key %>"><%- footerItem.prePart.value %></span><%= footerItem.placeholder %><span data-i18n="<%= footerItem.postPart.key %>"><%- footerItem.postPart.value %></span>
-      <% } else { %>
-        <span data-i18n="<%= footerItem.key %>"><%- footerItem.value %></span>
-      <% } %>
+    <!-- Project link (shown for all footer types) -->
+    <span data-i18n="footer.projectLink"><%- allI18n['en-US'].footer.projectLink %></span>
+    <br />
+    
+    <!-- Your IP and Ray ID (hidden for simple footer type) -->
+    <div id="footer-details" <% if (config.footerType === 'simple') { %>style="display: none;"<% } %>>
+      <!-- Your IP with placeholders -->
+      <span data-i18n="footer.yourIpPre"><%- allI18n['en-US'].footer.yourIpPre %></span>::CLIENT_IP:: (::GEO::)<span data-i18n="footer.yourIpPost"><%- allI18n['en-US'].footer.yourIpPost %></span>
       <br />
-    <%}%>
+      
+      <!-- Ray ID with placeholders -->
+      <span data-i18n="footer.rayIdPre"><%- allI18n['en-US'].footer.rayIdPre %></span>::RAY_ID::<span data-i18n="footer.rayIdPost"><%- allI18n['en-US'].footer.rayIdPost %></span>
+      <br />
+    </div>
+    
+    <!-- Hit in (hidden by default, shown by JavaScript when footerType is "withHit") -->
+    <span id="hitin-container" style="display: none;">
+      <span data-i18n="footer.hitIn"><%- allI18n['en-US'].footer.hitIn %></span>
+      <br />
+    </span>
   </text>
+  
+  <!-- JavaScript to show hitin when needed -->
+  <script>
+    // Show hit-in footer element for "withHit" footerType
+    if ('<%= config.footerType %>' === 'withHit') {
+      document.getElementById('hitin-container').style.display = 'inline';
+    }
+  </script>
 </footer>

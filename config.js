@@ -99,30 +99,6 @@ const createHelper = (i18n) => ({
   },
 });
 
-const createFooter = (i18n, includeHit = false) => {
-  const footer = [
-    { key: "footer.projectLink", value: i18n.footer.projectLink },
-    { 
-      key: "footer.yourIp", 
-      type: "placeholder",
-      prePart: { key: "footer.yourIpPre", value: i18n.footer.yourIpPre },
-      placeholder: "::CLIENT_IP:: (::GEO::)",
-      postPart: { key: "footer.yourIpPost", value: i18n.footer.yourIpPost }
-    },
-    { 
-      key: "footer.rayId",
-      type: "placeholder", 
-      prePart: { key: "footer.rayIdPre", value: i18n.footer.rayIdPre },
-      placeholder: "::RAY_ID::",
-      postPart: { key: "footer.rayIdPost", value: i18n.footer.rayIdPost }
-    }
-  ];
-  if (includeHit) {
-    footer.push({ key: "footer.hitIn", value: i18n.footer.hitIn });
-  }
-  return footer;
-};
-
 // Get the status i18n key from status value
 const getStatusKey = (statusValue) => {
   const statusMap = {
@@ -139,7 +115,6 @@ const getStatusKey = (statusValue) => {
 
 // Export helper functions for use by app.js
 exports.createHelper = createHelper;
-exports.createFooter = createFooter;
 exports.getStatusKey = getStatusKey;
 
 // Page specifications without language-specific content

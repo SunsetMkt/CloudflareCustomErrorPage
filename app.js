@@ -28,21 +28,6 @@ config.builderConfig.forEach((pageConfig) => {
   // Resolve the card based on cardType
   const card = helper[pageConfig.cardType];
   
-  // Resolve the footer based on footerType
-  let footer;
-  switch (pageConfig.footerType) {
-    case "simple":
-      footer = [{ key: "footer.projectLink", value: defaultI18n.footer.projectLink }];
-      break;
-    case "withHit":
-      footer = config.createFooter(defaultI18n, true);
-      break;
-    case "standard":
-    default:
-      footer = config.createFooter(defaultI18n, false);
-      break;
-  }
-  
   // Create the page configuration with multilingual support
   const item = {
     fileName: pageConfig.fileName,
@@ -50,7 +35,7 @@ config.builderConfig.forEach((pageConfig) => {
     textKey: pageConfig.textKey,
     card: card,
     reasonKey: pageConfig.reasonKey,
-    footer: footer,
+    footerType: pageConfig.footerType, // Pass footerType to template for JavaScript logic
     script: pageConfig.script,
     allI18n: allI18n // Pass all translations to the template
   };
