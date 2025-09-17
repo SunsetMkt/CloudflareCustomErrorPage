@@ -1,103 +1,151 @@
-const helper = {
+const i18n = {
+  client: "Your Client",
+  edgeNetwork: "Cloudflare Edge Network",
+  webServer: "Web Server",
+  provider: "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
+  explain: "What happened?",
+  howtodo: "What can I do?",
+  
+  // Status text internationalization
+  status: {
+    working: "Working",
+    error: "Error", 
+    unknown: "Unknown",
+    tooManyRequests: "Too Many Requests",
+    challenging: "Challenging",
+    underAttack: "Under Attack",
+    protected: "Protected"
+  },
+  
+  // Common footer strings
+  footer: {
+    projectLink: 'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+    yourIp: "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
+    rayId: "Ray ID is <code>::RAY_ID::</code>",
+    hitIn: "Hit in <code id=\"pop\"> undefined </code>"
+  },
+  
+  // JavaScript parsing strings
+  parsing: {
+    errorRefNumber: "Error reference number: ",
+    cloudflareLocation: "Cloudflare Location: "
+  }
+};
+
+const createHelper = (i18n) => ({
   allWorking: {
     client: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     edgeNetwork: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     webServer: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
   },
   ServerError: {
     client: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     edgeNetwork: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     webServer: {
-      status: "Error",
+      status: i18n.status.error,
       color: "red",
     },
   },
   edgeError: {
     client: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     edgeNetwork: {
-      status: "Error",
+      status: i18n.status.error,
       color: "red",
     },
     webServer: {
-      status: "Unknown",
+      status: i18n.status.unknown,
       color: "yellow",
     },
   },
   edgeBanned: {
     client: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     edgeNetwork: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     webServer: {
-      status: "Unknown",
+      status: i18n.status.unknown,
       color: "yellow",
     },
   },
   edgeLimit: {
     client: {
-      status: "Too Many Requests",
+      status: i18n.status.tooManyRequests,
       color: "red",
     },
     edgeNetwork: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     webServer: {
-      status: "Unknown",
+      status: i18n.status.unknown,
       color: "yellow",
     },
   },
   challenge: {
     client: {
-      status: "Challenging",
+      status: i18n.status.challenging,
       color: "yellow",
     },
     edgeNetwork: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     webServer: {
-      status: "Unknown",
+      status: i18n.status.unknown,
       color: "yellow",
     },
   },
   underAttack: {
     client: {
-      status: "Under Attack",
+      status: i18n.status.underAttack,
       color: "yellow",
     },
     edgeNetwork: {
-      status: "Working",
+      status: i18n.status.working,
       color: "green",
     },
     webServer: {
-      status: "Protected",
+      status: i18n.status.protected,
       color: "yellow",
     },
   },
+});
+
+const createFooter = (i18n, includeHit = false) => {
+  const footer = [
+    i18n.footer.projectLink,
+    i18n.footer.yourIp,
+    i18n.footer.rayId
+  ];
+  if (includeHit) {
+    footer.push(i18n.footer.hitIn);
+  }
+  return footer;
 };
+
+const helper = createHelper(i18n);
 
 exports.builderConfig = [
   {
@@ -111,9 +159,7 @@ exports.builderConfig = [
       howtodo:
         "Check Our Project on <a href='https://github.com/186526/CloudflareCustomErrorPage'>GitHub</a>.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-    ],
+    footer: [i18n.footer.projectLink],
     script: function () {},
   },
   {
@@ -125,12 +171,7 @@ exports.builderConfig = [
       explain: "The web server reported a Server error.",
       howtodo: "Please try again in a few minutes.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-      'Hit in <code id="pop"> undefined </code>',
-    ],
+    footer: createFooter(i18n, true),
     script: function () {
       const baseDetils = document.querySelector(".cf-error-details");
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
@@ -139,12 +180,12 @@ exports.builderConfig = [
       let POP = "undefined";
       baseDetils.querySelector("ul").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
-          let check = e.innerText.replace("Error reference number: ", "");
+          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
           if (check !== e.innerText) {
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace("Cloudflare Location: ", "");
+          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
           if (check !== e.innerText) {
             POP = check;
             return;
@@ -168,11 +209,7 @@ exports.builderConfig = [
       explain: "Cloudflare Edge Network reported a error.",
       howtodo: "Please try again in a few minutes.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {
       const baseDetils = document.querySelector(".cf-error-details");
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
@@ -183,12 +220,12 @@ exports.builderConfig = [
       let POP = "undefined";
       baseDetils.querySelector("ul.cferror_details").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
-          let check = e.innerText.replace("Error reference number: ", "");
+          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
           if (check !== e.innerText) {
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace("Cloudflare Location: ", "");
+          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
           if (check !== e.innerText) {
             POP = check;
             return;
@@ -213,11 +250,7 @@ exports.builderConfig = [
       howtodo:
         "Provide the website owner with a screenshot of the 1006 error message you received.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -231,11 +264,7 @@ exports.builderConfig = [
       howtodo:
         "Provide the website owner with a screenshot of the 1020 error message you received.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -247,11 +276,7 @@ exports.builderConfig = [
       explain: "Your request rate to the current site is too fast.",
       howtodo: "Please try again in a few minutes.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -264,11 +289,7 @@ exports.builderConfig = [
       howtodo:
         "Contact the website owner to request access from your location.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -280,11 +301,7 @@ exports.builderConfig = [
       explain: "Your IP address needs to be verified to access this website.",
       howtodo: "Complete the challenge below to continue.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -296,11 +313,7 @@ exports.builderConfig = [
       explain: "Your location needs to be verified to access this website.",
       howtodo: "Complete the challenge below to continue.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -312,11 +325,7 @@ exports.builderConfig = [
       explain: "Complete a challenge to verify you are human.",
       howtodo: "Complete the challenge below to continue browsing.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -328,11 +337,7 @@ exports.builderConfig = [
       explain: "Complete an interactive challenge to continue.",
       howtodo: "Solve the challenge presented below to access the website.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
   {
@@ -346,11 +351,7 @@ exports.builderConfig = [
       howtodo:
         "Please enable JavaScript and wait while we verify your browser.",
     },
-    footer: [
-      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
-      "Ray ID is <code>::RAY_ID::</code>",
-    ],
+    footer: createFooter(i18n),
     script: function () {},
   },
 ];
@@ -362,4 +363,30 @@ exports.i18n = {
   provider: "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
   explain: "What happened?",
   howtodo: "What can I do?",
+  
+  // Status text internationalization
+  status: {
+    working: "Working",
+    error: "Error", 
+    unknown: "Unknown",
+    tooManyRequests: "Too Many Requests",
+    challenging: "Challenging",
+    underAttack: "Under Attack",
+    protected: "Protected"
+  },
+  
+  // Common footer strings
+  footer: {
+    projectLink: 'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+    yourIp: "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
+    rayId: "Ray ID is <code>::RAY_ID::</code>"
+  },
+  
+  // JavaScript parsing strings
+  parsing: {
+    errorRefNumber: "Error reference number: ",
+    cloudflareLocation: "Cloudflare Location: "
+  }
 };
+
+exports.i18n = i18n;
