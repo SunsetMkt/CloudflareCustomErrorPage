@@ -21,10 +21,37 @@
   />
   <link href="index.css" rel="stylesheet" />
   <script>
-    // Client-side i18n support
-    window.i18n = <%- JSON.stringify(i18n) %>;
+    // Multi-language client-side i18n support
+    window.allI18n = <%- JSON.stringify(allI18n) %>;
+    window.currentLang = 'en'; // Default to English
     
-    // Simple translation function
+    // Detect browser language
+    function detectLanguage() {
+      const browserLang = navigator.language || navigator.userLanguage;
+      const supportedLangs = Object.keys(window.allI18n);
+      
+      // Try exact match first
+      if (supportedLangs.includes(browserLang)) {
+        return browserLang;
+      }
+      
+      // Try language code without region (e.g., 'zh' from 'zh-CN')
+      const langCode = browserLang.split('-')[0];
+      for (const lang of supportedLangs) {
+        if (lang.startsWith(langCode)) {
+          return lang;
+        }
+      }
+      
+      // Default to English
+      return 'en';
+    }
+    
+    // Set current language
+    window.currentLang = detectLanguage();
+    window.i18n = window.allI18n[window.currentLang];
+    
+    // Enhanced translation function
     window.t = function(key, defaultValue) {
       const keys = key.split('.');
       let value = window.i18n;
@@ -40,12 +67,23 @@
     
     // Apply translations on page load
     window.addEventListener('DOMContentLoaded', function() {
+      // Update HTML lang attribute
+      document.documentElement.lang = window.currentLang;
+      
       // Translate elements with data-i18n attribute
       document.querySelectorAll('[data-i18n]').forEach(function(element) {
         const key = element.getAttribute('data-i18n');
-        const defaultValue = element.textContent;
+        const defaultValue = element.getAttribute('data-i18n-default') || element.textContent;
         element.innerHTML = window.t(key, defaultValue);
       });
+      
+      // Update title if it has translation data
+      const titleElement = document.querySelector('title');
+      if (titleElement && titleElement.getAttribute('data-i18n')) {
+        const titleKey = titleElement.getAttribute('data-i18n');
+        const titleDefault = titleElement.getAttribute('data-i18n-default') || titleElement.textContent;
+        titleElement.textContent = window.t(titleKey, titleDefault);
+      }
     });
   </script>
   <script defer>
