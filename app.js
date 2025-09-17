@@ -10,7 +10,7 @@ fs.copyFileSync("./index.css", "./public/index.css");
 const enConfig = require("./config.js");
 const zhConfig = require("./i18n/config-zh-CN.js");
 
-// Create combined i18n object
+// Create combined i18n object for client-side use
 const allI18n = {
   'en': enConfig.i18n,
   'zh-CN': zhConfig.i18n
@@ -29,38 +29,28 @@ const findChineseConfig = (enItem) => {
   return zhItem || zhConfig.builderConfig[0]; // fallback to first item
 };
 
-// Generate unified multi-language pages using original filenames
+// Generate pages using original template with English content but multi-language data
 enConfig.builderConfig.forEach((enItem) => {
   const zhItem = findChineseConfig(enItem);
   
-  // Create combined config for multi-lang template
-  const multiLangConfig = {
-    statusCode: enItem.statusCode,
-    fileName: enItem.fileName, // Use original filename without prefix
-    text: enItem.text,
-    textZh: zhItem.text,
-    card: enItem.card,
-    cardZh: zhItem.card,
-    reason: enItem.reason,
-    reasonZh: zhItem.reason,
-    script: enItem.script || (() => {})
-  };
-
-  const filePath = `./public/${multiLangConfig.fileName}`;
+  const filePath = `./public/${enItem.fileName}`;
   const dir = require('path').dirname(filePath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
   let html = ejs.render(
-    fs.readFileSync("./ejs/multi-lang.ejs", { encoding: "utf8" }),
+    fs.readFileSync("./ejs/index.ejs", { encoding: "utf8" }),
     {
-      config: multiLangConfig,
-      allI18n: allI18n,
+      config: enItem,       // Use English config for generation
+      i18n: enConfig.i18n,  // Use English i18n for generation
+      allI18n: allI18n,     // Include all languages for client-side switching
+      zhConfig: zhItem,     // Include Chinese config for client-side switching
+      helper: {},
     },
     {
-      root: "./ejs/multi-lang.ejs",
-      filename: "./ejs/multi-lang.ejs",
+      root: "./ejs/index.ejs",
+      filename: "./ejs/index.ejs",
     },
   );
   fs.writeFileSync(filePath, html, { encoding: "utf8" });

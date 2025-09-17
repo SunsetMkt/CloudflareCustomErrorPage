@@ -21,31 +21,142 @@
   />
   <link href="index.css" rel="stylesheet" />
   <script>
-    // Client-side i18n support
-    window.i18n = <%- JSON.stringify(i18n) %>;
+    // Multi-language i18n support - include all languages
+    window.allI18n = <%- JSON.stringify(allI18n) %>;
+    window.zhConfig = <%- JSON.stringify(zhConfig) %>;
     
-    // Simple translation function
-    window.t = function(key, defaultValue) {
-      const keys = key.split('.');
-      let value = window.i18n;
-      for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k];
-        } else {
-          return defaultValue || key;
-        }
+    // Current language (default to English)
+    window.currentLang = 'en';
+    
+    // Auto-detect language based on browser locale
+    function detectAndSetLanguage() {
+      const browserLang = navigator.language || navigator.userLanguage;
+      
+      // Check if browser language matches Chinese
+      if (browserLang.startsWith('zh')) {
+        window.currentLang = 'zh-CN';
+      } else {
+        window.currentLang = 'en';
       }
-      return value || defaultValue || key;
+      
+      // Apply the detected language
+      applyLanguage(window.currentLang);
+    }
+    
+    // Apply language translations
+    function applyLanguage(lang) {
+      const i18nData = window.allI18n[lang];
+      const configData = lang === 'zh-CN' ? window.zhConfig : null;
+      
+      if (!i18nData) return;
+      
+      // Update page title
+      if (configData) {
+        document.title = `<%= config.statusCode %> | ${configData.text}`;
+      }
+      
+      // Update main sections
+      const explainElement = document.querySelector('reason explain main');
+      if (explainElement) explainElement.textContent = i18nData.explain;
+      
+      const howtodoElement = document.querySelector('reason howtodo main');
+      if (howtodoElement) howtodoElement.textContent = i18nData.howtodo;
+      
+      // Update reason content
+      if (configData && configData.reason) {
+        const explainP = document.querySelector('reason explain p');
+        if (explainP) explainP.innerHTML = configData.reason.explain;
+        
+        const howtodoP = document.querySelector('reason howtodo p');
+        if (howtodoP) howtodoP.innerHTML = configData.reason.howtodo;
+      }
+      
+      // Update status card labels
+      const clientCard = document.querySelectorAll('status card main')[0];
+      if (clientCard) clientCard.textContent = i18nData.client;
+      
+      const edgeCard = document.querySelectorAll('status card main')[1];
+      if (edgeCard) edgeCard.textContent = i18nData.edgeNetwork;
+      
+      const serverCard = document.querySelectorAll('status card main')[2];
+      if (serverCard) serverCard.textContent = i18nData.webServer;
+      
+      // Update status texts if Chinese config available
+      if (configData && configData.card) {
+        const statusTexts = document.querySelectorAll('status card status-text');
+        if (statusTexts[0]) statusTexts[0].textContent = configData.card.client.status;
+        if (statusTexts[1]) statusTexts[1].textContent = configData.card.edgeNetwork.status;
+        if (statusTexts[2]) statusTexts[2].textContent = configData.card.webServer.status;
+      }
+      
+      // Update provider text
+      const provider = document.querySelector('footer provider');
+      if (provider) provider.innerHTML = i18nData.provider;
+      
+      // Update footer text
+      const footerText = document.querySelector('footer text');
+      if (footerText && configData) {
+        // Create footer content
+        let footerContent = '';
+        if (configData.footer && Array.isArray(configData.footer)) {
+          configData.footer.forEach(item => {
+            footerContent += item + '<br />';
+          });
+        } else {
+          // Use i18n footer data
+          footerContent = i18nData.footer.projectLink + '<br />';
+          footerContent += `<span class="ip-revealer" onclick="revealIP(this)" title="${lang === 'zh-CN' ? '点击显示 IP' : 'Click to reveal IP'}">${i18nData.footer.yourIp}</span><br />`;
+          footerContent += i18nData.footer.rayId + '<br />';
+        }
+        footerText.innerHTML = footerContent;
+      }
+      
+      // Update description if Chinese config available  
+      if (configData) {
+        const description = document.querySelector('header description');
+        if (description) description.textContent = configData.text;
+      }
+      
+      // Update HTML lang attribute
+      document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+    }
+    
+    // IP reveal function  
+    window.revealIP = function(element) {
+      if (element.classList.contains('revealed')) return;
+      
+      element.classList.add('revealed');
+      element.style.cursor = 'default';
+      element.style.background = 'transparent';
+      element.style.border = 'none';
     };
     
-    // Apply translations on page load
+    // Initialize on page load
     window.addEventListener('DOMContentLoaded', function() {
-      // Translate elements with data-i18n attribute
-      document.querySelectorAll('[data-i18n]').forEach(function(element) {
-        const key = element.getAttribute('data-i18n');
-        const defaultValue = element.textContent;
-        element.innerHTML = window.t(key, defaultValue);
-      });
+      // Add IP reveal styles
+      const style = document.createElement('style');
+      style.textContent = `
+        .ip-revealer {
+          cursor: pointer;
+          background: #f8f9fa;
+          border: 1px dashed #ccc;
+          padding: 2px 6px;
+          border-radius: 3px;
+          user-select: none;
+        }
+        .ip-revealer:hover {
+          background: #e9ecef;
+        }
+        .ip-revealer.revealed {
+          background: transparent !important;
+          border: none !important;
+          cursor: default !important;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Detect and set language automatically
+      detectAndSetLanguage();
     });
   </script>
   <script defer>

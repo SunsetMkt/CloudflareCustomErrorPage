@@ -2,9 +2,15 @@
   <provider><%- i18n.provider %></provider>
   <br />
   <text>
-    <%for(x of config.footer ) {%>
-    <%-x%>
-    <br />
+    <%for(let i = 0; i < config.footer.length; i++) {%>
+      <%if(config.footer[i].includes('::CLIENT_IP::')) {%>
+        <span class="ip-revealer" onclick="revealIP(this)" title="Click to reveal IP">
+          <%-config.footer[i]%>
+        </span>
+      <%} else {%>
+        <%-config.footer[i]%>
+      <%}%>
+      <br />
     <%}%>
   </text>
 </footer>
