@@ -127,7 +127,7 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
       '请求命中到 <code id="pop"> undefined </code>',
     ],
@@ -170,7 +170,7 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {
@@ -209,12 +209,12 @@ exports.builderConfig = [
     card: helper.edgeBanned,
     reason: {
       explain:
-        "所请求网站的站长修改了 Cloudflare 安全级别或者封禁了您的 IP 地址。自从站长禁用您的 IP 后，Cloudflare support 不能覆盖他们的配置。",
-      howtodo: "请联系站长并提供该页面。",
+        "所请求网站的管理员修改了 Cloudflare 安全级别或者封禁了您的 IP 地址。自从管理员禁用您的 IP 后，Cloudflare 支持不能覆盖他们的配置。",
+      howtodo: "请联系管理员并提供该页面。",
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
@@ -226,11 +226,11 @@ exports.builderConfig = [
     card: helper.edgeBanned,
     reason: {
       explain: "您被该网站所设置的 Cloudflare 防火墙规则所拦截。",
-      howtodo: "请联系站长并提供该页面。",
+      howtodo: "请联系管理员并提供该页面。",
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
@@ -246,7 +246,7 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
@@ -262,14 +262,14 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "zh-CN/challenge-ip.html",
-    statusCode: 1010,
+    statusCode: 403,
     text: "IP 验证挑战",
     card: helper.challenge,
     reason: {
@@ -278,14 +278,14 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "zh-CN/challenge-country.html",
-    statusCode: 1011,
+    statusCode: 403,
     text: "国家验证挑战",
     card: helper.challenge,
     reason: {
@@ -294,14 +294,14 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "zh-CN/managed-challenge.html",
-    statusCode: 1013,
+    statusCode: 403,
     text: "托管验证挑战",
     card: helper.challenge,
     reason: {
@@ -310,14 +310,14 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "zh-CN/interactive-challenge.html",
-    statusCode: 1016,
+    statusCode: 403,
     text: "交互式验证挑战",
     card: helper.challenge,
     reason: {
@@ -326,14 +326,14 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "zh-CN/js-challenge.html",
-    statusCode: 1012,
+    statusCode: 403,
     text: "JavaScript 验证挑战",
     card: helper.underAttack,
     reason: {
@@ -342,7 +342,7 @@ exports.builderConfig = [
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
-      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "您的 IP 是 <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID 是 <code>::RAY_ID::</code>",
     ],
     script: function () {},

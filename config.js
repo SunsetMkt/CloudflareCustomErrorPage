@@ -127,7 +127,7 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
       'Hit in <code id="pop"> undefined </code>',
     ],
@@ -170,7 +170,7 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {
@@ -215,7 +215,7 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
@@ -233,7 +233,7 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
@@ -249,7 +249,7 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
@@ -266,14 +266,14 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "challenge-ip.html",
-    statusCode: 1010,
+    statusCode: 403,
     text: "IP challenge",
     card: helper.challenge,
     reason: {
@@ -282,14 +282,14 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "challenge-country.html",
-    statusCode: 1011,
+    statusCode: 403,
     text: "Country challenge",
     card: helper.challenge,
     reason: {
@@ -298,14 +298,14 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "managed-challenge.html",
-    statusCode: 1013,
+    statusCode: 403,
     text: "Managed challenge",
     card: helper.challenge,
     reason: {
@@ -314,14 +314,14 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "interactive-challenge.html",
-    statusCode: 1016,
+    statusCode: 403,
     text: "Interactive challenge",
     card: helper.challenge,
     reason: {
@@ -330,14 +330,14 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
   },
   {
     fileName: "js-challenge.html",
-    statusCode: 1012,
+    statusCode: 403,
     text: "JavaScript challenge",
     card: helper.underAttack,
     reason: {
@@ -348,7 +348,7 @@ exports.builderConfig = [
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
-      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Your IP is <code> ::CLIENT_IP:: (::GEO::) </code>",
       "Ray ID is <code>::RAY_ID::</code>",
     ],
     script: function () {},
