@@ -69,6 +69,34 @@ const helper = {
       color: "yellow",
     },
   },
+  challenge: {
+    client: {
+      status: "Challenging",
+      color: "yellow",
+    },
+    edgeNetwork: {
+      status: "Working",
+      color: "green",
+    },
+    webServer: {
+      status: "Unknown",
+      color: "yellow",
+    },
+  },
+  underAttack: {
+    client: {
+      status: "Under Attack",
+      color: "yellow",
+    },
+    edgeNetwork: {
+      status: "Working",
+      color: "green",
+    },
+    webServer: {
+      status: "Protected",
+      color: "yellow",
+    },
+  },
 };
 
 exports.builderConfig = [
@@ -220,6 +248,102 @@ exports.builderConfig = [
     reason: {
       explain: "Your request rate to the current site is too fast.",
       howtodo: "Please try again in a few minutes.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "block-country.html",
+    statusCode: 1009,
+    text: "Country or region banned",
+    card: helper.edgeBanned,
+    reason: {
+      explain: "Your country or region has been banned by the website owner.",
+      howtodo: "Contact the website owner to request access from your location.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "challenge-ip.html",
+    statusCode: 1010,
+    text: "IP challenge",
+    card: helper.challenge,
+    reason: {
+      explain: "Your IP address needs to be verified to access this website.",
+      howtodo: "Complete the challenge below to continue.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "challenge-country.html",
+    statusCode: 1011,
+    text: "Country challenge",
+    card: helper.challenge,
+    reason: {
+      explain: "Your location needs to be verified to access this website.",
+      howtodo: "Complete the challenge below to continue.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "managed-challenge.html",
+    statusCode: 1013,
+    text: "Managed challenge",
+    card: helper.challenge,
+    reason: {
+      explain: "Complete a challenge to verify you are human.",
+      howtodo: "Complete the challenge below to continue browsing.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "interactive-challenge.html",
+    statusCode: 1016,
+    text: "Interactive challenge",
+    card: helper.challenge,
+    reason: {
+      explain: "Complete an interactive challenge to continue.",
+      howtodo: "Solve the challenge presented below to access the website.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "js-challenge.html",
+    statusCode: 1012,
+    text: "JavaScript challenge",
+    card: helper.underAttack,
+    reason: {
+      explain: "This website is using a security service to protect itself from online attacks.",
+      howtodo: "Please enable JavaScript and wait while we verify your browser.",
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',

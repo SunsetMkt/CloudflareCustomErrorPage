@@ -69,6 +69,34 @@ const helper = {
       color: "yellow",
     },
   },
+  challenge: {
+    client: {
+      status: "验证中",
+      color: "yellow",
+    },
+    edgeNetwork: {
+      status: "运行",
+      color: "green",
+    },
+    webServer: {
+      status: "未知",
+      color: "yellow",
+    },
+  },
+  underAttack: {
+    client: {
+      status: "受攻击保护",
+      color: "yellow",
+    },
+    edgeNetwork: {
+      status: "运行",
+      color: "green",
+    },
+    webServer: {
+      status: "保护中",
+      color: "yellow",
+    },
+  },
 };
 
 exports.builderConfig = [
@@ -217,6 +245,102 @@ exports.builderConfig = [
     reason: {
       explain: "您的请求速率过快。",
       howtodo: "请在几分钟后重试。",
+    },
+    footer: [
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "Ray ID 是 <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "zh-CN/block-country.html",
+    statusCode: 1009,
+    text: "国家或地区被封禁",
+    card: helper.edgeBanned,
+    reason: {
+      explain: "您的国家或地区已被网站所有者封禁。",
+      howtodo: "请联系网站所有者申请访问权限。",
+    },
+    footer: [
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "Ray ID 是 <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "zh-CN/challenge-ip.html",
+    statusCode: 1010,
+    text: "IP 验证挑战",
+    card: helper.challenge,
+    reason: {
+      explain: "需要验证您的 IP 地址以访问此网站。",
+      howtodo: "完成下方的验证以继续访问。",
+    },
+    footer: [
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "Ray ID 是 <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "zh-CN/challenge-country.html",
+    statusCode: 1011,
+    text: "国家验证挑战",
+    card: helper.challenge,
+    reason: {
+      explain: "需要验证您的地理位置以访问此网站。",
+      howtodo: "完成下方的验证以继续访问。",
+    },
+    footer: [
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "Ray ID 是 <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "zh-CN/managed-challenge.html",
+    statusCode: 1013,
+    text: "托管验证挑战",
+    card: helper.challenge,
+    reason: {
+      explain: "完成验证以证明您是真人用户。",
+      howtodo: "完成下方的验证以继续浏览。",
+    },
+    footer: [
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "Ray ID 是 <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "zh-CN/interactive-challenge.html",
+    statusCode: 1016,
+    text: "交互式验证挑战",
+    card: helper.challenge,
+    reason: {
+      explain: "完成交互式验证以继续访问。",
+      howtodo: "解决下方的验证挑战以访问网站。",
+    },
+    footer: [
+      '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
+      "您的 IP 是 <code> ::CLIENT_IP:: </code>",
+      "Ray ID 是 <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "zh-CN/js-challenge.html",
+    statusCode: 1012,
+    text: "JavaScript 验证挑战",
+    card: helper.underAttack,
+    reason: {
+      explain: "该网站正在使用安全服务保护自身免受在线攻击。",
+      howtodo: "请启用 JavaScript 并等待我们验证您的浏览器。",
     },
     footer: [
       '来自 <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> 项目',
