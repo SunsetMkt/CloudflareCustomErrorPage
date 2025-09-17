@@ -14,9 +14,9 @@
     <%- include('lib/card') -%>
     <%- include('lib/reason') -%>
 
-    <% if (config.statusCode === 1010 || config.statusCode === 1011 || config.statusCode === 1013 || config.statusCode === 1016) { %>
+    <% if (config.statusCode === 403) { %>
     <div class="challenge-container">::CAPTCHA_BOX::</div>
-    <% } else if (config.statusCode === 1012) { %>
+    <% } else if (config.fileName === "js-challenge.html") { %>
     <div class="challenge-container">::IM_UNDER_ATTACK_BOX::</div>
     <% } %>
   </body>
@@ -24,6 +24,10 @@
   <%- include('lib/footer') -%>
 
   <none> ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX:: </none>
+
+  <noscript>
+    ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX::
+  </noscript>
 
   <script>
     (<%- config.script.toString() %>)()
