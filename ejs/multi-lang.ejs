@@ -23,36 +23,7 @@
     />
     <link href="index.css" rel="stylesheet" />
     <style>
-      .lang-switcher {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 5px;
-      }
-      .lang-switcher button {
-        background: none;
-        border: none;
-        padding: 5px 10px;
-        margin: 0 2px;
-        cursor: pointer;
-        border-radius: 3px;
-        font-size: 14px;
-      }
-      .lang-switcher button.active {
-        background: #007bff;
-        color: white;
-      }
-      .lang-switcher button:hover {
-        background: #e9ecef;
-      }
-      .lang-switcher button.active:hover {
-        background: #0056b3;
-      }
-      
+    <style>
       .ip-revealer {
         cursor: pointer;
         background: #f8f9fa;
@@ -81,40 +52,34 @@
         'zh-CN': <%- JSON.stringify(allI18n['zh-CN']) %>
       };
       
-      // Current language
-      window.currentLang = 'en';
+      // Auto-detect language based on browser locale
+      window.currentLang = 'en'; // Default to English
       
-      // Translation function for current language
-      window.t = function(key, defaultValue) {
-        const keys = key.split('.');
-        let value = window.allI18n[window.currentLang];
-        for (const k of keys) {
-          if (value && typeof value === 'object' && k in value) {
-            value = value[k];
-          } else {
-            return defaultValue || key;
-          }
-        }
-        return value || defaultValue || key;
-      };
-      
-      // Switch language function
-      window.switchLang = function(lang) {
-        window.currentLang = lang;
+      // Detect browser language and set appropriate language
+      function detectAndSetLanguage() {
+        const browserLang = navigator.language || navigator.userLanguage;
         
+        // Check if browser language matches our supported languages
+        if (browserLang.startsWith('zh')) {
+          window.currentLang = 'zh-CN';
+        } else {
+          window.currentLang = 'en';
+        }
+        
+        // Apply the detected language
+        applyLanguage(window.currentLang);
+      }
+      
+      // Apply language to page elements
+      function applyLanguage(lang) {
         // Update active language elements
         document.querySelectorAll('[data-lang]').forEach(function(element) {
           element.classList.toggle('active', element.getAttribute('data-lang') === lang);
         });
         
-        // Update language switcher buttons
-        document.querySelectorAll('.lang-switcher button').forEach(function(button) {
-          button.classList.toggle('active', button.getAttribute('data-lang') === lang);
-        });
-        
         // Update HTML lang attribute
         document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
-      };
+      }
       
       // IP reveal function
       window.revealIP = function(element) {
@@ -122,15 +87,12 @@
         
         element.classList.add('revealed');
         element.style.cursor = 'default';
-        // Note: In actual Cloudflare environment, ::CLIENT_IP:: would be replaced
-        // For demo purposes, we'll show placeholder
-        element.innerHTML = element.innerHTML;
       };
       
       // Initialize on page load
       window.addEventListener('DOMContentLoaded', function() {
-        // Set default language to English
-        switchLang('en');
+        // Detect and set language automatically
+        detectAndSetLanguage();
         
         // Add click handlers to IP revealers
         document.querySelectorAll('.ip-revealer').forEach(function(element) {
@@ -146,12 +108,6 @@
   </head>
 
   <body>
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-      <button data-lang="en" onclick="switchLang('en')">English</button>
-      <button data-lang="zh-CN" onclick="switchLang('zh-CN')">中文</button>
-    </div>
-
     <header>
       <main>
         <%= config.statusCode %>

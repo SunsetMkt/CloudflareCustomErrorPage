@@ -1,5 +1,4 @@
 const ejs = require("ejs");
-const configs = [require("./config.js"), require("./i18n/config-zh-CN.js")];
 const fs = require("fs");
 
 if (!fs.existsSync("./public")) {
@@ -7,33 +6,7 @@ if (!fs.existsSync("./public")) {
 }
 fs.copyFileSync("./index.css", "./public/index.css");
 
-// Generate original separate language files
-configs.forEach((config) =>
-  config.builderConfig.map((item) => {
-    // Create subdirectories if needed
-    const filePath = `./public/${item.fileName}`;
-    const dir = require('path').dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
-    let html = ejs.render(
-      fs.readFileSync("./ejs/index.ejs", { encoding: "utf8" }),
-      {
-        config: item,
-        i18n: config.i18n,
-        helper: {},
-      },
-      {
-        root: "./ejs/index.ejs",
-        filename: "./ejs/index.ejs",
-      },
-    );
-    fs.writeFileSync(filePath, html, { encoding: "utf8" });
-  }),
-);
-
-// Generate unified multi-language pages
+// Load both language configs
 const enConfig = require("./config.js");
 const zhConfig = require("./i18n/config-zh-CN.js");
 
@@ -45,24 +18,25 @@ const allI18n = {
 
 // Helper function to find corresponding Chinese config for English config
 const findChineseConfig = (enItem) => {
-  // Try to find matching config by status code
+  // Try to find matching config by status code and filename patterns
   const zhItem = zhConfig.builderConfig.find(zh => 
     zh.statusCode === enItem.statusCode ||
     (enItem.fileName.includes('challenge') && zh.fileName.includes('challenge')) ||
     (enItem.fileName.includes('block') && zh.fileName.includes('block')) ||
-    (enItem.fileName.includes('error') && zh.fileName.includes('error'))
+    (enItem.fileName.includes('error') && zh.fileName.includes('error')) ||
+    (enItem.fileName === 'index.html' && zh.fileName.includes('index.html'))
   );
   return zhItem || zhConfig.builderConfig[0]; // fallback to first item
 };
 
-// Generate multi-language versions for each English config
+// Generate unified multi-language pages using original filenames
 enConfig.builderConfig.forEach((enItem) => {
   const zhItem = findChineseConfig(enItem);
   
   // Create combined config for multi-lang template
   const multiLangConfig = {
     statusCode: enItem.statusCode,
-    fileName: `multi-lang-${enItem.fileName}`,
+    fileName: enItem.fileName, // Use original filename without prefix
     text: enItem.text,
     textZh: zhItem.text,
     card: enItem.card,
