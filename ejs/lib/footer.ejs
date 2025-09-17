@@ -1,10 +1,14 @@
 <footer>
-  <provider data-i18n="provider" data-i18n-default="<%- i18n.provider %>"><%- i18n.provider %></provider>
+  <provider data-i18n="provider"><%- i18n.provider %></provider>
   <br />
   <text>
     <%for(footerItem of config.footer ) {%>
-    <span data-i18n="<%= footerItem.key %>" data-i18n-default="<%- footerItem.value %>"><%- footerItem.value %></span>
-    <br />
+      <% if (footerItem.type === 'placeholder') { %>
+        <span data-i18n="<%= footerItem.prePart.key %>"><%- footerItem.prePart.value %></span><%= footerItem.placeholder %><span data-i18n="<%= footerItem.postPart.key %>"><%- footerItem.postPart.value %></span>
+      <% } else { %>
+        <span data-i18n="<%= footerItem.key %>"><%- footerItem.value %></span>
+      <% } %>
+      <br />
     <%}%>
   </text>
 </footer>
