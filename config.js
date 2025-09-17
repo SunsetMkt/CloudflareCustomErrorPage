@@ -69,6 +69,48 @@ const helper = {
       color: "yellow",
     },
   },
+  edgeBlocked: {
+    client: {
+      status: "Working",
+      color: "green",
+    },
+    edgeNetwork: {
+      status: "Blocked",
+      color: "red",
+    },
+    webServer: {
+      status: "Unknown",
+      color: "yellow",
+    },
+  },
+  dnsError: {
+    client: {
+      status: "Working",
+      color: "green",
+    },
+    edgeNetwork: {
+      status: "DNS Error",
+      color: "red",
+    },
+    webServer: {
+      status: "Unknown",
+      color: "yellow",
+    },
+  },
+  hostError: {
+    client: {
+      status: "Working",
+      color: "green",
+    },
+    edgeNetwork: {
+      status: "Configuration Error",
+      color: "red",
+    },
+    webServer: {
+      status: "Unknown",
+      color: "yellow",
+    },
+  },
 };
 
 exports.builderConfig = [
@@ -220,6 +262,326 @@ exports.builderConfig = [
     reason: {
       explain: "Your request rate to the current site is too fast.",
       howtodo: "Please try again in a few minutes.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1000.html",
+    statusCode: 1000,
+    text: "DNS points to prohibited IP",
+    card: helper.dnsError,
+    reason: {
+      explain: "The domain's DNS configuration points to an IP address that is not allowed by Cloudflare.",
+      howtodo: "Contact the website owner to check their DNS configuration.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1001.html",
+    statusCode: 1001,
+    text: "DNS resolution error",
+    card: helper.dnsError,
+    reason: {
+      explain: "The domain cannot be resolved to a valid IP address.",
+      howtodo: "Check the domain name and try again later. Contact the website owner if the problem persists.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1002.html",
+    statusCode: 1002,
+    text: "Restricted",
+    card: helper.edgeBlocked,
+    reason: {
+      explain: "The website is restricted and cannot be accessed.",
+      howtodo: "Contact the website owner for more information about access restrictions.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1003.html",
+    statusCode: 1003,
+    text: "Direct IP access not allowed",
+    card: helper.hostError,
+    reason: {
+      explain: "Direct IP access is not allowed. You must use the domain name.",
+      howtodo: "Access the website using its domain name instead of the IP address.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1004.html",
+    statusCode: 1004,
+    text: "Host not configured to serve web traffic",
+    card: helper.hostError,
+    reason: {
+      explain: "This host is not configured to serve web traffic over this protocol.",
+      howtodo: "Contact the website owner to check their Cloudflare configuration.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1005.html",
+    statusCode: 1005,
+    text: "Blocked",
+    card: helper.edgeBlocked,
+    reason: {
+      explain: "The request has been blocked by Cloudflare security settings.",
+      howtodo: "Contact the website owner if you believe this is an error.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1007.html",
+    statusCode: 1007,
+    text: "Rate limited",
+    card: helper.edgeLimit,
+    reason: {
+      explain: "The request has been rate limited by Cloudflare.",
+      howtodo: "Wait a moment and try again. If the problem persists, contact the website owner.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1008.html",
+    statusCode: 1008,
+    text: "DNS points to prohibited IP",
+    card: helper.dnsError,
+    reason: {
+      explain: "The DNS configuration for this domain points to a prohibited IP address.",
+      howtodo: "Contact the website owner to update their DNS configuration.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1009.html",
+    statusCode: 1009,
+    text: "Blocked",
+    card: helper.edgeBlocked,
+    reason: {
+      explain: "Access to this resource has been blocked by Cloudflare security rules.",
+      howtodo: "Contact the website owner if you believe you should have access.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1010.html",
+    statusCode: 1010,
+    text: "Access denied",
+    card: helper.edgeBanned,
+    reason: {
+      explain: "Access to this resource has been denied by the website owner.",
+      howtodo: "Contact the website owner if you believe you should have access.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1011.html",
+    statusCode: 1011,
+    text: "Access denied (country blocked)",
+    card: helper.edgeBanned,
+    reason: {
+      explain: "Access from your country or region has been blocked by the website owner.",
+      howtodo: "This restriction is set by the website owner. Contact them if you believe this is an error.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1012.html",
+    statusCode: 1012,
+    text: "Access denied",
+    card: helper.edgeBanned,
+    reason: {
+      explain: "The website owner has blocked access to this resource.",
+      howtodo: "Contact the website owner for more information about this access restriction.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1013.html",
+    statusCode: 1013,
+    text: "HTTP hostname and TLS SNI hostname mismatch",
+    card: helper.hostError,
+    reason: {
+      explain: "The hostname in the HTTP request does not match the TLS SNI hostname.",
+      howtodo: "Check your connection and try again. Contact the website owner if the problem persists.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1014.html",
+    statusCode: 1014,
+    text: "CNAME Cross-User Banned",
+    card: helper.hostError,
+    reason: {
+      explain: "The CNAME configuration violates Cloudflare's cross-user policies.",
+      howtodo: "Contact the website owner to update their DNS configuration.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1016.html",
+    statusCode: 1016,
+    text: "Origin DNS error",
+    card: helper.dnsError,
+    reason: {
+      explain: "Cloudflare could not resolve the origin server's DNS records.",
+      howtodo: "Contact the website owner to check their origin server's DNS configuration.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1018.html",
+    statusCode: 1018,
+    text: "Host not found",
+    card: helper.dnsError,
+    reason: {
+      explain: "The hostname could not be resolved or does not exist.",
+      howtodo: "Check the website URL and try again. Contact the website owner if the problem persists.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1019.html",
+    statusCode: 1019,
+    text: "Compute server error",
+    card: helper.edgeError,
+    reason: {
+      explain: "Cloudflare Workers encountered an error while processing your request.",
+      howtodo: "Try again in a few minutes. Contact the website owner if the problem persists.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1100.html",
+    statusCode: 1100,
+    text: "Security challenge",
+    card: helper.edgeBlocked,
+    reason: {
+      explain: "Cloudflare's security systems have detected unusual behavior and require verification.",
+      howtodo: "Complete the security challenge to continue accessing the website.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1101.html",
+    statusCode: 1101,
+    text: "Rendering error",
+    card: helper.edgeError,
+    reason: {
+      explain: "Cloudflare Workers encountered an error during rendering.",
+      howtodo: "Try refreshing the page. Contact the website owner if the problem persists.",
+    },
+    footer: [
+      'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
+      "Your IP is <code> ::CLIENT_IP:: </code>",
+      "Ray ID is <code>::RAY_ID::</code>",
+    ],
+    script: function () {},
+  },
+  {
+    fileName: "1102.html",
+    statusCode: 1102,
+    text: "Worker threw exception",
+    card: helper.edgeError,
+    reason: {
+      explain: "A Cloudflare Worker script encountered an unhandled exception.",
+      howtodo: "Try again later. Contact the website owner if the problem persists.",
     },
     footer: [
       'From the <a href="https://github.com/186526/CloudflareCustomErrorPage">186526/CloudflareCustomErrorPage</a> project.',
