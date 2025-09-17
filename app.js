@@ -32,7 +32,7 @@ config.builderConfig.forEach((pageConfig) => {
   let footer;
   switch (pageConfig.footerType) {
     case "simple":
-      footer = [defaultI18n.footer.projectLink];
+      footer = [{ key: "footer.projectLink", value: defaultI18n.footer.projectLink }];
       break;
     case "withHit":
       footer = config.createFooter(defaultI18n, true);
@@ -62,6 +62,7 @@ config.builderConfig.forEach((pageConfig) => {
       i18n: defaultI18n, // Default i18n for template structure
       allI18n: allI18n, // All translations for multilingual support
       helper: {},
+      getStatusKey: config.getStatusKey, // Helper function to get status i18n key
     },
     {
       root: "./ejs/index.ejs",
