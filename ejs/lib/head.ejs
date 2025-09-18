@@ -67,6 +67,14 @@
       return value || defaultValue || key;
     };
 
+    // Footer IP reveal
+    function revealIP() {
+      const ip = document.getElementById("client-ip");
+      const reveal = document.getElementById("click-to-reveal");
+      ip.style.display = "inline";
+      reveal.style.display = "none";
+    }
+
     // Apply translations on page load
     window.addEventListener("DOMContentLoaded", function () {
       // Update HTML lang attribute
@@ -93,12 +101,10 @@
       if (!baseDetils) {
         return;
       }
-
       let isError1xxx = false;
       if (baseDetils.querySelector(".cferror_details")) {
         isError1xxx = true;
       }
-
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
       let Explain = baseDetils.querySelector("p").innerHTML;
       if (isError1xxx) {

@@ -13,9 +13,15 @@
       <!-- Your IP with placeholders -->
       <span data-i18n="footer.yourIpPre"
         ><%- allI18n['en-US'].footer.yourIpPre %></span
-      ><code>::CLIENT_IP:: (::GEO::)</code
+      ><code id="client-ip" style="display: none">::CLIENT_IP:: (::GEO::)</code
       ><span data-i18n="footer.yourIpPost"
         ><%- allI18n['en-US'].footer.yourIpPost %></span
+      ><a
+        id="click-to-reveal"
+        data-i18n="footer.clickToReveal"
+        onclick="revealIP()"
+        href="javascript:void(0)"
+        ><%- allI18n['en-US'].footer.clickToReveal %></a
       >
       <br />
 
