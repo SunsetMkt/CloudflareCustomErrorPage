@@ -27,6 +27,7 @@ const i18n = {
     rayIdPre: "Ray ID 是 ",
     rayIdPost: " ",
     clickToReveal: "点击显示",
+    notice: "若此问题持续发生，您可能需要启用 JavaScript 和 Cookies。",
   },
 
   // Page-specific reason strings

@@ -27,6 +27,8 @@ const i18n = {
     rayIdPre: "Ray ID is ",
     rayIdPost: " ",
     clickToReveal: "Click to reveal",
+    notice:
+      "If this issue persists, you may need to enable JavaScript and Cookies.",
   },
 
   // Page-specific reason strings
