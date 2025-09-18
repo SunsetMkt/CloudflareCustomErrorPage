@@ -88,6 +88,9 @@
       
       // cf-error-details
       const baseDetils = document.querySelector(".cf-error-details");
+      if (!baseDetils) {
+        return;
+      }
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
       const Explain = baseDetils.querySelector("p").innerText;
       let ErrorNumber = document.querySelector("header main").innerText;
