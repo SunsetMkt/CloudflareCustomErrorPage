@@ -13,12 +13,6 @@
 
     <%- include('lib/card') -%>
     <%- include('lib/reason') -%>
-
-    <% if (config.statusCode === 403) { %>
-    <div class="challenge-container">::CAPTCHA_BOX::</div>
-    <% } else if (config.fileName === "js-challenge.html") { %>
-    <div class="challenge-container">::IM_UNDER_ATTACK_BOX::</div>
-    <% } %>
   </body>
 
   <%- include('lib/footer') -%>

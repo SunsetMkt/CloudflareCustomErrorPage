@@ -10,5 +10,8 @@
     <p data-i18n="reasons.<%= config.reasonKey %>.howtodo">
       <%- allI18n['en-US'].reasons[config.reasonKey].howtodo %>
     </p>
+    <% if (config.statusCode === 403) { %>
+    <div class="challenge-container">::CAPTCHA_BOX::</div>
+    <% } %>
   </howtodo>
 </reason>
