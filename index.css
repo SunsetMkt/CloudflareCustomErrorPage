@@ -115,6 +115,7 @@ reason p {
 
 icon {
   font-size: var(--icon-size) !important;
+  user-select: none;
 }
 
 a {
