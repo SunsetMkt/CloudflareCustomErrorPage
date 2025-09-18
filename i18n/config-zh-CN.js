@@ -1,7 +1,7 @@
 const i18n = {
-  client: "您所运行的客户端",
+  client: "您的客户端",
   edgeNetwork: "Cloudflare 边缘网络",
-  webServer: "该站点服务器",
+  webServer: "站点服务器",
   provider: "与 <a href='https://cloudflare.com'>Cloudflare</a> 一同运行。",
   explain: "发生了什么？",
   howtodo: "我该做什么？",
