@@ -1,7 +1,7 @@
 const i18n = {
-  client: "Your Client",
-  edgeNetwork: "Cloudflare Edge Network",
-  webServer: "Web Server",
+  client: "Your Web Client",
+  edgeNetwork: "Cloudflare CDN Network",
+  webServer: "Origin Server",
   provider: "Running with <a href='https://cloudflare.com'>Cloudflare</a>.",
   explain: "What happened?",
   howtodo: "What can I do?",
@@ -107,3 +107,4 @@ const i18n = {
 };
 
 exports.i18n = i18n;
+console.log('test change')

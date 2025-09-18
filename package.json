@@ -8,10 +8,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "node app.js"
+    "build": "node app.js",
+    "build:minify": "node app.js",
+    "dev": "node dev-server.js"
   },
   "devDependencies": {
+    "chokidar": "^4.0.3",
+    "clean-css": "^5.3.3",
     "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "html-minifier-terser": "^7.2.0",
     "prettier": "^3.6.2",
     "prettier-plugin-ejs": "^1.0.3"
   }
