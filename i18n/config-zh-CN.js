@@ -37,7 +37,7 @@ const i18n = {
         "检查我们的项目，在<a href='https://github.com/186526/CloudflareCustomErrorPage'>GitHub</a>。",
     },
     "5xxerror": {
-      explain: "网络服务器汇报了一个错误。",
+      explain: "站点服务器汇报了一个错误。",
       howtodo: "请在几分钟后重试。",
     },
     "1xxxerror": {
@@ -46,7 +46,7 @@ const i18n = {
     },
     "block-ip": {
       explain:
-        "所请求网站的管理员修改了 Cloudflare 安全级别或者封禁了您的 IP 地址。自从管理员禁用您的 IP 后，Cloudflare 支持不能覆盖他们的配置。",
+        "所请求网站的管理员修改了 Cloudflare 安全级别或者封禁了您的 IP 地址。由于管理员阻止了您的 IP 地址，Cloudflare 支持不能覆盖他们的配置。",
       howtodo: "请联系管理员并提供该页面。",
     },
     "block-waf": {
@@ -62,11 +62,11 @@ const i18n = {
       howtodo: "请联系网站所有者申请访问权限。",
     },
     "challenge-ip": {
-      explain: "需要验证您的 IP 地址以访问此网站。",
+      explain: "您的 IP 地址需要验证以访问此网站。",
       howtodo: "完成下方的验证以继续访问。",
     },
     "challenge-country": {
-      explain: "需要验证您的地理位置以访问此网站。",
+      explain: "您的地理位置需要验证以访问此网站。",
       howtodo: "完成下方的验证以继续访问。",
     },
     "managed-challenge": {
@@ -75,7 +75,7 @@ const i18n = {
     },
     "interactive-challenge": {
       explain: "完成交互式验证以继续访问。",
-      howtodo: "解决下方的验证挑战以访问网站。",
+      howtodo: "解决下方的质询以访问网站。",
     },
     "js-challenge": {
       explain: "该网站正在使用安全服务保护自身免受在线攻击。",
@@ -88,15 +88,15 @@ const i18n = {
     index: "OK",
     "5xxerror": "服务器侧错误",
     "1xxxerror": "Cloudflare 侧错误",
-    "block-ip": "您的 IP 已经被封禁",
+    "block-ip": "您的 IP 已经被阻止",
     "block-waf": "访问受阻",
     1015: "请求过多",
-    "block-country": "国家或地区被封禁",
-    "challenge-ip": "IP 验证挑战",
-    "challenge-country": "国家验证挑战",
-    "managed-challenge": "托管验证挑战",
-    "interactive-challenge": "交互式验证挑战",
-    "js-challenge": "JavaScript 验证挑战",
+    "block-country": "国家或地区被阻止",
+    "challenge-ip": "IP 质询",
+    "challenge-country": "国家质询",
+    "managed-challenge": "托管质询",
+    "interactive-challenge": "交互式质询",
+    "js-challenge": "JavaScript 质询",
   },
 };
 
