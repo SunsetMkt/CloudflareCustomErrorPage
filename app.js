@@ -35,7 +35,6 @@ config.builderConfig.forEach((pageConfig) => {
     textKey: pageConfig.textKey,
     card: card,
     reasonKey: pageConfig.reasonKey,
-    footerType: pageConfig.footerType, // Pass footerType to template for JavaScript logic
     script: pageConfig.script,
     allI18n: allI18n // Pass all translations to the template
   };

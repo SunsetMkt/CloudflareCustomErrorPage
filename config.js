@@ -125,7 +125,6 @@ exports.builderConfig = [
     textKey: "index",
     cardType: "allWorking",
     reasonKey: "index",
-    footerType: "simple",
     script: function () {},
   },
   {
@@ -134,7 +133,6 @@ exports.builderConfig = [
     textKey: "5xxerror",
     cardType: "ServerError",
     reasonKey: "5xxerror",
-    footerType: "withHit",
     script: function (i18n) {
       const baseDetils = document.querySelector(".cf-error-details");
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
@@ -170,7 +168,6 @@ exports.builderConfig = [
     textKey: "1xxxerror",
     cardType: "edgeError",
     reasonKey: "1xxxerror",
-    footerType: "standard",
     script: function (i18n) {
       const baseDetils = document.querySelector(".cf-error-details");
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
@@ -206,7 +203,6 @@ exports.builderConfig = [
     textKey: "block-ip",
     cardType: "edgeBanned",
     reasonKey: "block-ip",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -215,7 +211,6 @@ exports.builderConfig = [
     textKey: "block-waf",
     cardType: "edgeBanned",
     reasonKey: "block-waf",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -224,7 +219,6 @@ exports.builderConfig = [
     textKey: "1015",
     cardType: "edgeLimit",
     reasonKey: "1015",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -233,7 +227,6 @@ exports.builderConfig = [
     textKey: "block-country",
     cardType: "edgeBanned",
     reasonKey: "block-country",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -242,7 +235,6 @@ exports.builderConfig = [
     textKey: "challenge-ip",
     cardType: "challenge",
     reasonKey: "challenge-ip",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -251,7 +243,6 @@ exports.builderConfig = [
     textKey: "challenge-country",
     cardType: "challenge",
     reasonKey: "challenge-country",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -260,7 +251,6 @@ exports.builderConfig = [
     textKey: "managed-challenge",
     cardType: "challenge",
     reasonKey: "managed-challenge",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -269,7 +259,6 @@ exports.builderConfig = [
     textKey: "interactive-challenge",
     cardType: "challenge",
     reasonKey: "interactive-challenge",
-    footerType: "standard",
     script: function () {},
   },
   {
@@ -278,7 +267,6 @@ exports.builderConfig = [
     textKey: "js-challenge",
     cardType: "underAttack",
     reasonKey: "js-challenge",
-    footerType: "standard",
     script: function () {},
   },
 ];
