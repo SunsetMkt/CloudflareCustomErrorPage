@@ -96,6 +96,16 @@
         titleElement.textContent = `<%= config.statusCode %> | ${window.t(titleKey, titleDefault)}`;
       }
 
+      // Scroll to challenge
+      const challengeContainer = document.querySelector(".challenge-container");
+      if (challengeContainer) {
+        challengeContainer.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+
       // cf-error-details
       const baseDetils = document.querySelector("none .cf-error-details");
       if (!baseDetils) {
