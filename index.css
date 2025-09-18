@@ -31,6 +31,7 @@ body {
   font-family: var(--base-font-family);
   color: var(--font-color);
   background-color: var(--background-color);
+  transition: all 0.3s ease-in-out;
 }
 
 header {
