@@ -78,13 +78,33 @@
         element.innerHTML = window.t(key, defaultValue);
       });
       
-      // Update title if it has translation data
-      const titleElement = document.querySelector('title');
-      if (titleElement && titleElement.getAttribute('data-i18n')) {
-        const titleKey = titleElement.getAttribute('data-i18n');
-        const titleDefault = window.t(titleKey, titleElement.textContent);
-        titleElement.textContent = window.t(titleKey, titleDefault);
-      }
+      // cf-error-details
+      const baseDetils = document.querySelector(".cf-error-details");
+      const ErrorMessage = baseDetils.querySelector("h1").innerText;
+      const Explain = baseDetils.querySelector("p").innerText;
+      let ErrorNumber = document.querySelector("header main").innerText;
+      let POP = "undefined";
+      baseDetils.querySelector("ul").childNodes.forEach((e) => {
+        if (e.innerText !== undefined) {
+          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
+          if (check !== e.innerText) {
+            ErrorNumber = check;
+            return;
+          }
+          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
+          if (check !== e.innerText) {
+            POP = check;
+            return;
+          }
+        }
+      });
+      document.querySelector("header main").innerText = ErrorNumber;
+      document.querySelector("header description").innerText = ErrorMessage;
+      document.querySelector("explain p").innerText = Explain;
+      document.querySelector("text #pop").innerText = POP;
+      document.getElementById('hitin-container').style.display = 'inline';
+      document.querySelector("title").innerText =
+        `${ErrorNumber} | ${ErrorMessage}`;
     });
   </script>
   <script defer>

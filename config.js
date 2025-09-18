@@ -133,34 +133,7 @@ exports.builderConfig = [
     textKey: "5xxerror",
     cardType: "ServerError",
     reasonKey: "5xxerror",
-    script: function (i18n) {
-      const baseDetils = document.querySelector(".cf-error-details");
-      const ErrorMessage = baseDetils.querySelector("h1").innerText;
-      const Explain = baseDetils.querySelector("p").innerText;
-      let ErrorNumber = "5xx";
-      let POP = "undefined";
-      baseDetils.querySelector("ul").childNodes.forEach((e) => {
-        if (e.innerText !== undefined) {
-          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
-          if (check !== e.innerText) {
-            ErrorNumber = check;
-            return;
-          }
-          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
-          if (check !== e.innerText) {
-            POP = check;
-            return;
-          }
-        }
-      });
-      document.querySelector("header main").innerText = ErrorNumber;
-      document.querySelector("header description").innerText = ErrorMessage;
-      document.querySelector("explain p").innerText = Explain;
-      document.querySelector("text #pop").innerText = POP;
-      document.getElementById('hitin-container').style.display = 'inline';
-      document.querySelector("title").innerText =
-        `${ErrorNumber} | ${ErrorMessage}`;
-    },
+    script: function () {},
   },
   {
     fileName: "1xxxerror.html",
@@ -168,34 +141,7 @@ exports.builderConfig = [
     textKey: "1xxxerror",
     cardType: "edgeError",
     reasonKey: "1xxxerror",
-    script: function (i18n) {
-      const baseDetils = document.querySelector(".cf-error-details");
-      const ErrorMessage = baseDetils.querySelector("h1").innerText;
-      const Explain =
-        baseDetils.querySelector("p").innerText +
-        document.querySelector("ul").innerText;
-      let ErrorNumber = "1xxx";
-      let POP = "undefined";
-      baseDetils.querySelector("ul.cferror_details").childNodes.forEach((e) => {
-        if (e.innerText !== undefined) {
-          let check = e.innerText.replace(i18n.parsing.errorRefNumber, "");
-          if (check !== e.innerText) {
-            ErrorNumber = check;
-            return;
-          }
-          check = e.innerText.replace(i18n.parsing.cloudflareLocation, "");
-          if (check !== e.innerText) {
-            POP = check;
-            return;
-          }
-        }
-      });
-      document.querySelector("header main").innerText = ErrorNumber;
-      document.querySelector("header description").innerText = ErrorMessage;
-      document.querySelector("explain p").innerText = Explain;
-      document.querySelector("title").innerText =
-        `${ErrorNumber} | ${ErrorMessage}`;
-    },
+    script: function () {},
   },
   {
     fileName: "block-ip.html",
