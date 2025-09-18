@@ -100,13 +100,14 @@
       }
 
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
+      let Explain = baseDetils.querySelector("p").innerHTML;
       if (isError1xxx) {
         let tmpExplain = baseDetils.cloneNode(true);
         tmpExplain.querySelector("h1").remove();
         tmpExplain.querySelector(".cferror_details").remove();
-        const Explain = tmpExplain.innerHTML;
+        Explain = tmpExplain.innerHTML;
       } else {
-        const Explain = baseDetils.querySelector("p").innerHTML;
+        Explain = baseDetils.querySelector("p").innerHTML;
       }
       let ErrorNumber = document.querySelector("header main").innerText;
       baseDetils.querySelectorAll("li").forEach((e) => {
