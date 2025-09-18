@@ -96,7 +96,6 @@
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
       const Explain = baseDetils.querySelector("p").innerText;
       let ErrorNumber = document.querySelector("header main").innerText;
-      let POP = "undefined";
       baseDetils.querySelector("ul").childNodes.forEach((e) => {
         if (e.innerText !== undefined) {
           let check = e.innerText.replace("Error reference number: ", "");
@@ -104,18 +103,11 @@
             ErrorNumber = check;
             return;
           }
-          check = e.innerText.replace("Cloudflare Location: ", "");
-          if (check !== e.innerText) {
-            POP = check;
-            return;
-          }
         }
       });
       document.querySelector("header main").innerText = ErrorNumber;
       document.querySelector("header description").innerText = ErrorMessage;
       document.querySelector("explain p").innerText = Explain;
-      document.querySelector("text #pop").innerText = POP;
-      document.getElementById('hitin-container').style.display = 'inline';
       document.querySelector("title").innerText =
         `${ErrorNumber} | ${ErrorMessage}`;
     });

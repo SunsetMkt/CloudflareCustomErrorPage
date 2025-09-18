@@ -25,7 +25,6 @@ const i18n = {
     yourIpPost: " ",
     rayIdPre: "Ray ID is ",
     rayIdPost: " ",
-    hitIn: 'Hit in <code id="pop"> undefined </code>',
   },
 
   // Page-specific reason strings

@@ -25,7 +25,6 @@ const i18n = {
     yourIpPost: " ",
     rayIdPre: "Ray ID 是 ",
     rayIdPost: " ",
-    hitIn: '请求命中到 <code id="pop"> undefined </code>',
   },
 
   // Page-specific reason strings
