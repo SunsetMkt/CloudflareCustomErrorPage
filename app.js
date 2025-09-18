@@ -13,8 +13,8 @@ fs.copyFileSync("./index.css", "./public/index.css");
 
 // Collect all i18n configurations
 const allI18n = {
-  'en-US': enUS.i18n,
-  'zh-CN': zhCN.i18n
+  "en-US": enUS.i18n,
+  "zh-CN": zhCN.i18n,
 };
 
 // Default language is English
@@ -24,10 +24,10 @@ const defaultI18n = enUS.i18n;
 config.builderConfig.forEach((pageConfig) => {
   // Create helpers and footer based on default language for page structure
   const helper = config.createHelper(defaultI18n);
-  
+
   // Resolve the card based on cardType
   const card = helper[pageConfig.cardType];
-  
+
   // Create the page configuration with multilingual support
   const item = {
     fileName: pageConfig.fileName,
@@ -36,7 +36,7 @@ config.builderConfig.forEach((pageConfig) => {
     card: card,
     reasonKey: pageConfig.reasonKey,
     script: pageConfig.script,
-    allI18n: allI18n // Pass all translations to the template
+    allI18n: allI18n, // Pass all translations to the template
   };
 
   let html = ejs.render(

@@ -102,15 +102,17 @@ const createHelper = (i18n) => ({
 // Get the status i18n key from status value
 const getStatusKey = (statusValue) => {
   const statusMap = {
-    "Working": "working",
-    "Error": "error", 
-    "Unknown": "unknown",
+    Working: "working",
+    Error: "error",
+    Unknown: "unknown",
     "Too Many Requests": "tooManyRequests",
-    "Challenging": "challenging",
+    Challenging: "challenging",
     "Under Attack": "underAttack",
-    "Protected": "protected"
+    Protected: "protected",
   };
-  return statusMap[statusValue] || statusValue.toLowerCase().replace(/\s+/g, '');
+  return (
+    statusMap[statusValue] || statusValue.toLowerCase().replace(/\s+/g, "")
+  );
 };
 
 // Export helper functions for use by app.js

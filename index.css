@@ -16,7 +16,12 @@
 
 body {
   margin: 2rem 2rem;
-  font-family: "Red Hat Display", Ubuntu, Roboto, Noto Sans SC, sans-serif;
+  font-family:
+    "Red Hat Display",
+    Ubuntu,
+    Roboto,
+    Noto Sans SC,
+    sans-serif;
   color: var(--font-color);
   background-color: var(--background-color);
 }
@@ -26,7 +31,11 @@ header {
 }
 
 header description {
-  font-family: Ubuntu, Roboto, Noto Sans SC, sans-serif;
+  font-family:
+    Ubuntu,
+    Roboto,
+    Noto Sans SC,
+    sans-serif;
   font-size: var(--font-size-description);
   line-height: var(--fonr-size-description);
   color: var(--font-color-lighter);
@@ -35,11 +44,16 @@ header description {
 header main {
   font-size: var(--font-size-main);
   line-height: var(--font-size-main);
-  font-family: Fira Mono, Ubuntu, monospace;
+  font-family:
+    Fira Mono,
+    Ubuntu,
+    monospace;
 }
 
 code {
-  font-family: Fira Mono, monospace;
+  font-family:
+    Fira Mono,
+    monospace;
 }
 
 none {
@@ -94,7 +108,11 @@ status > card main {
 
 status-text,
 reason p {
-  font-family: Ubuntu, Roboto, Noto Sans SC, sans-serif;
+  font-family:
+    Ubuntu,
+    Roboto,
+    Noto Sans SC,
+    sans-serif;
 }
 
 reason p {

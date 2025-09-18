@@ -14,7 +14,9 @@
     href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
     rel="stylesheet"
   />
-  <title data-i18n="pageText.<%= config.textKey %>"><%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %></title>
+  <title data-i18n="pageText.<%= config.textKey %>">
+    <%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %>
+  </title>
   <link
     href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
     rel="stylesheet"
@@ -24,17 +26,17 @@
     // Multi-language client-side i18n support
     window.allI18n = <%- JSON.stringify(allI18n) %>;
     window.currentLang = 'en'; // Default to English
-    
+
     // Detect browser language
     function detectLanguage() {
       const browserLang = navigator.language || navigator.userLanguage;
       const supportedLangs = Object.keys(window.allI18n);
-      
+
       // Try exact match first
       if (supportedLangs.includes(browserLang)) {
         return browserLang;
       }
-      
+
       // Try language code without region (e.g., 'zh' from 'zh-CN')
       const langCode = browserLang.split('-')[0];
       for (const lang of supportedLangs) {
@@ -42,15 +44,15 @@
           return lang;
         }
       }
-      
+
       // Default to English
       return 'en';
     }
-    
+
     // Set current language
     window.currentLang = detectLanguage();
     window.i18n = window.allI18n[window.currentLang];
-    
+
     // Enhanced translation function
     window.t = function(key, defaultValue) {
       const keys = key.split('.');
@@ -64,12 +66,12 @@
       }
       return value || defaultValue || key;
     };
-    
+
     // Apply translations on page load
     window.addEventListener('DOMContentLoaded', function() {
       // Update HTML lang attribute
       document.documentElement.lang = window.currentLang;
-      
+
       // Translate elements with data-i18n attribute
       document.querySelectorAll('[data-i18n]').forEach(function(element) {
         const key = element.getAttribute('data-i18n');
@@ -77,7 +79,7 @@
         const defaultValue = window.t(key, element.textContent);
         element.innerHTML = window.t(key, defaultValue);
       });
-      
+
       // Update title if it has translation data
       const titleElement = document.querySelector('title');
       if (titleElement && titleElement.getAttribute('data-i18n')) {
@@ -85,7 +87,7 @@
         const titleDefault = window.t(titleKey, titleElement.textContent);
         titleElement.textContent = `<%= config.statusCode %> | ${window.t(titleKey, titleDefault)}`;
       }
-      
+
       // cf-error-details
       const baseDetils = document.querySelector(".cf-error-details");
       if (!baseDetils) {
