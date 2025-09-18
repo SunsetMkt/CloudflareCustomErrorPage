@@ -25,7 +25,7 @@
   <script>
     // Multi-language client-side i18n support
     window.allI18n = <%- JSON.stringify(allI18n) %>;
-    window.currentLang = 'en'; // Default to English
+    window.currentLang = "en"; // Default to English
 
     // Detect browser language
     function detectLanguage() {
@@ -38,7 +38,7 @@
       }
 
       // Try language code without region (e.g., 'zh' from 'zh-CN')
-      const langCode = browserLang.split('-')[0];
+      const langCode = browserLang.split("-")[0];
       for (const lang of supportedLangs) {
         if (lang.startsWith(langCode)) {
           return lang;
@@ -46,7 +46,7 @@
       }
 
       // Default to English
-      return 'en';
+      return "en";
     }
 
     // Set current language
@@ -54,11 +54,11 @@
     window.i18n = window.allI18n[window.currentLang];
 
     // Enhanced translation function
-    window.t = function(key, defaultValue) {
-      const keys = key.split('.');
+    window.t = function (key, defaultValue) {
+      const keys = key.split(".");
       let value = window.i18n;
       for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
+        if (value && typeof value === "object" && k in value) {
           value = value[k];
         } else {
           return defaultValue || key;
@@ -68,22 +68,22 @@
     };
 
     // Apply translations on page load
-    window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener("DOMContentLoaded", function () {
       // Update HTML lang attribute
       document.documentElement.lang = window.currentLang;
 
       // Translate elements with data-i18n attribute
-      document.querySelectorAll('[data-i18n]').forEach(function(element) {
-        const key = element.getAttribute('data-i18n');
+      document.querySelectorAll("[data-i18n]").forEach(function (element) {
+        const key = element.getAttribute("data-i18n");
         // Use English i18n as default instead of data-i18n-default
         const defaultValue = window.t(key, element.textContent);
         element.innerHTML = window.t(key, defaultValue);
       });
 
       // Update title if it has translation data
-      const titleElement = document.querySelector('title');
-      if (titleElement && titleElement.getAttribute('data-i18n')) {
-        const titleKey = titleElement.getAttribute('data-i18n');
+      const titleElement = document.querySelector("title");
+      if (titleElement && titleElement.getAttribute("data-i18n")) {
+        const titleKey = titleElement.getAttribute("data-i18n");
         const titleDefault = window.t(titleKey, titleElement.textContent);
         titleElement.textContent = `<%= config.statusCode %> | ${window.t(titleKey, titleDefault)}`;
       }
@@ -93,10 +93,23 @@
       if (!baseDetils) {
         return;
       }
+
+      let isError1xxx = false;
+      if (baseDetils.querySelector(".cferror_details")) {
+        isError1xxx = true;
+      }
+
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
-      const Explain = baseDetils.querySelector("p").innerText;
+      if (isError1xxx) {
+        let tmpExplain = baseDetils.cloneNode(true);
+        tmpExplain.querySelector("h1").remove();
+        tmpExplain.querySelector(".cferror_details").remove();
+        const Explain = tmpExplain.innerHTML;
+      } else {
+        const Explain = baseDetils.querySelector("p").innerHTML;
+      }
       let ErrorNumber = document.querySelector("header main").innerText;
-      baseDetils.querySelector("ul").childNodes.forEach((e) => {
+      baseDetils.querySelectorAll("li").forEach((e) => {
         if (e.innerText !== undefined) {
           let check = e.innerText.replace("Error reference number: ", "");
           if (check !== e.innerText) {
@@ -107,7 +120,7 @@
       });
       document.querySelector("header main").innerText = ErrorNumber;
       document.querySelector("header description").innerText = ErrorMessage;
-      document.querySelector("explain p").innerText = Explain;
+      document.querySelector("explain p").innerHTML = Explain;
       document.querySelector("title").innerText =
         `${ErrorNumber} | ${ErrorMessage}`;
     });
