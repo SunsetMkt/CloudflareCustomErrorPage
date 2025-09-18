@@ -78,6 +78,14 @@
         element.innerHTML = window.t(key, defaultValue);
       });
       
+      // Update title if it has translation data
+      const titleElement = document.querySelector('title');
+      if (titleElement && titleElement.getAttribute('data-i18n')) {
+        const titleKey = titleElement.getAttribute('data-i18n');
+        const titleDefault = window.t(titleKey, titleElement.textContent);
+        titleElement.textContent = `<%= config.statusCode %> | ${window.t(titleKey, titleDefault)}`;
+      }
+      
       // cf-error-details
       const baseDetils = document.querySelector(".cf-error-details");
       const ErrorMessage = baseDetils.querySelector("h1").innerText;
