@@ -159,6 +159,7 @@ exports.builderConfig = [
       document.querySelector("header description").innerText = ErrorMessage;
       document.querySelector("explain p").innerText = Explain;
       document.querySelector("text #pop").innerText = POP;
+      document.getElementById('hitin-container').style.display = 'inline';
       document.querySelector("title").innerText =
         `${ErrorNumber} | ${ErrorMessage}`;
     },

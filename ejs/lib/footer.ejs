@@ -6,8 +6,8 @@
     <span data-i18n="footer.projectLink"><%- allI18n['en-US'].footer.projectLink %></span>
     <br />
     
-    <!-- Your IP and Ray ID (hidden for simple footer type) -->
-    <div id="footer-details" <% if (config.footerType === 'simple') { %>style="display: none;"<% } %>>
+    <!-- Your IP and Ray ID -->
+    <div id="footer-details">
       <!-- Your IP with placeholders -->
       <span data-i18n="footer.yourIpPre"><%- allI18n['en-US'].footer.yourIpPre %></span>::CLIENT_IP:: (::GEO::)<span data-i18n="footer.yourIpPost"><%- allI18n['en-US'].footer.yourIpPost %></span>
       <br />
@@ -23,12 +23,4 @@
       <br />
     </span>
   </text>
-  
-  <!-- JavaScript to show hitin when needed -->
-  <script>
-    // Show hit-in footer element for "withHit" footerType
-    if ('<%= config.footerType %>' === 'withHit') {
-      document.getElementById('hitin-container').style.display = 'inline';
-    }
-  </script>
 </footer>
