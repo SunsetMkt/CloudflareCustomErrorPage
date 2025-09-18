@@ -4,11 +4,19 @@
     name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1"
   />
+  <meta
+    name="cf-error-page"
+    content="<%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %>"
+  />
   <meta name="renderer" content="webkit" />
   <meta name="force-rendering" content="webkit" />
   <meta name="backend-renderer" content="ejs" />
-  <meta name="custom-page" content="186526/CloudflareCustomErrorPage" />
+  <meta
+    name="custom-page-template"
+    content="186526/CloudflareCustomErrorPage"
+  />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
@@ -107,6 +115,7 @@
       }
 
       // cf-error-details
+      // This must be the last part since it has many returns
       const baseDetils = document.querySelector("none .cf-error-details");
       if (!baseDetils) {
         return;

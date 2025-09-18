@@ -4,16 +4,12 @@ Lightweight custom error page written for Cloudflare.
 
 ## How To Use
 
-Official Demo URL: [cloudflarecustomerrorpage.pages.dev](https://cloudflarecustomerrorpage.pages.dev)
-
-| Types        | URL                                                     |
-| ------------ | ------------------------------------------------------- |
-| 5XX Error    | <https://cloudflarecustomerrorpage.pages.dev/5xxerror>  |
-| 10XX Error   | <https://cloudflarecustomerrorpage.pages.dev/1xxxerror> |
-| Rate Limited | <https://cloudflarecustomerrorpage.pages.dev/1015>      |
-| WAF Block    | <https://cloudflarecustomerrorpage.pages.dev/block-waf> |
-| IP Banned    | <https://cloudflarecustomerrorpage.pages.dev/block-ip>  |
+Build on Cloudflare Pages with `npm run build`.
 
 ## License
 
 MIT
+
+## Why no modern frameworks?
+
+Cloudflare custom error page will embed all JavaScript and CSS (even more assets including fonts, images, etcs) in the HTML file to create a single file page. This will easily break many modern frameworks. The most modern framework we could use in this case is SSG (Static Site Generator), which must create vanilla HTML files.

@@ -2,7 +2,8 @@ const i18n = {
   client: "您的客户端",
   edgeNetwork: "Cloudflare 边缘网络",
   webServer: "站点服务器",
-  provider: "与 <a href='https://cloudflare.com'>Cloudflare</a> 一同运行。",
+  provider:
+    "由 <a rel='noopener noreferrer' target='_blank' href='https://www.cloudflare.com/5xx-error-landing/'>Cloudflare</a> 驱动。",
   explain: "发生了什么？",
   howtodo: "我该做什么？",
 
