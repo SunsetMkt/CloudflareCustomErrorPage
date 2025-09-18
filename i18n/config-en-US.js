@@ -28,12 +28,6 @@ const i18n = {
     hitIn: 'Hit in <code id="pop"> undefined </code>',
   },
 
-  // JavaScript parsing strings
-  parsing: {
-    errorRefNumber: "Error reference number: ",
-    cloudflareLocation: "Cloudflare Location: ",
-  },
-
   // Page-specific reason strings
   reasons: {
     index: {

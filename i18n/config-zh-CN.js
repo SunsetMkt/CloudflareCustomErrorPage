@@ -28,12 +28,6 @@ const i18n = {
     hitIn: '请求命中到 <code id="pop"> undefined </code>',
   },
 
-  // JavaScript parsing strings
-  parsing: {
-    errorRefNumber: "Error reference number: ",
-    cloudflareLocation: "Cloudflare Location: ",
-  },
-
   // Page-specific reason strings
   reasons: {
     index: {
