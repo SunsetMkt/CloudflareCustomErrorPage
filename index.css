@@ -16,13 +16,13 @@
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans",
     "Helvetica Neue";
   --zh-font-family:
-    "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback",
-    "Microsoft YaHei";
+    "HarmonyOS Sans SC", "PingFang SC", "Hiragino Sans GB",
+    "Droid Sans Fallback", "Microsoft YaHei";
   --code-font-family:
-    "Fira Mono", "Menlo", "Monaco", "Consolas", "Courier New",
+    "JetBrains Mono", "Menlo", "Monaco", "Consolas", "Courier New",
     var(--zh-font-family), monospace;
   --base-font-family:
-    "Red Hat Display", Ubuntu, Roboto, "Noto Sans SC", "Lato",
+    "HarmonyOS Sans SC", Ubuntu, Roboto, "Noto Sans SC", "Lato",
     var(--sys-font-family), var(--zh-font-family), sans-serif;
 }
 

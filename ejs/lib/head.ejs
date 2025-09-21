@@ -17,11 +17,13 @@
   />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
-    rel="stylesheet"
-  />
+  <!--
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Fira+Mono&family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+  -->
   <title data-i18n="pageText.<%= config.textKey %>">
     <%= config.statusCode %> | <%= allI18n['en-US'].pageText[config.textKey] %>
   </title>
@@ -151,7 +153,10 @@
         `${ErrorNumber} | ${ErrorMessage}`;
     });
   </script>
+  <!-- Load CSS dynamically to avoid Cloudflare single page conversion -->
   <script defer>
-    document.head.innerHTML += `<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">`;
+    document.head.innerHTML += `<link href="https://unpkg.com/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Regular.css" rel="stylesheet">`;
+    document.head.innerHTML += `<link href="https://unpkg.com/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Bold.css" rel="stylesheet">`;
+    document.head.innerHTML += `<link href="https://unpkg.com/@fontsource/jetbrains-mono@5.2.8/index.css" rel="stylesheet">`;
   </script>
 </head>
