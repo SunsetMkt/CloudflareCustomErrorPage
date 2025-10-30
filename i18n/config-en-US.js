@@ -112,7 +112,8 @@ const i18n = {
   // List page translations
   list: {
     title: "Available Pages",
-    description: "Below is a list of all available error pages in this template.",
+    description:
+      "Below is a list of all available error pages in this template.",
     availablePages: "Page List",
   },
 };

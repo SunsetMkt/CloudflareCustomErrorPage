@@ -17,17 +17,19 @@
         </p>
       </explain>
       <howtodo>
-        <main data-i18n="list.availablePages"><%= allI18n['en-US'].list.availablePages %></main>
+        <main data-i18n="list.availablePages">
+          <%= allI18n['en-US'].list.availablePages %>
+        </main>
         <div class="page-list">
           <% config.pages.forEach(function(page) { %>
-            <div class="page-item">
-              <a href="<%= page.fileName %>" class="page-link">
-                <div class="page-code"><%= page.statusCode %></div>
-                <div class="page-text" data-i18n="pageText.<%= page.textKey %>">
-                  <%= allI18n['en-US'].pageText[page.textKey] %>
-                </div>
-              </a>
-            </div>
+          <div class="page-item">
+            <a href="<%= page.fileName %>" class="page-link">
+              <div class="page-code"><%= page.statusCode %></div>
+              <div class="page-text" data-i18n="pageText.<%= page.textKey %>">
+                <%= allI18n['en-US'].pageText[page.textKey] %>
+              </div>
+            </a>
+          </div>
           <% }); %>
         </div>
       </howtodo>

@@ -30,8 +30,12 @@ const minifiedCss = new CleanCSS().minify(cssContent);
 if (minifiedCss.errors.length > 0) {
   console.error("CSS minification errors:", minifiedCss.errors);
 } else {
-  fs.writeFileSync("./public/index.css", minifiedCss.styles, { encoding: "utf8" });
-  console.log(`CSS minified: ${cssContent.length} → ${minifiedCss.styles.length} bytes`);
+  fs.writeFileSync("./public/index.css", minifiedCss.styles, {
+    encoding: "utf8",
+  });
+  console.log(
+    `CSS minified: ${cssContent.length} → ${minifiedCss.styles.length} bytes`,
+  );
 }
 
 // Collect all i18n configurations
@@ -77,12 +81,16 @@ const buildPages = async () => {
         filename: "./ejs/index.ejs",
       },
     );
-    
+
     // Minify HTML
     try {
       const minifiedHtml = await minifyHtml(html, htmlMinifierOptions);
-      fs.writeFileSync(`./public/${item.fileName}`, minifiedHtml, { encoding: "utf8" });
-      console.log(`Generated ${item.fileName}: ${html.length} → ${minifiedHtml.length} bytes`);
+      fs.writeFileSync(`./public/${item.fileName}`, minifiedHtml, {
+        encoding: "utf8",
+      });
+      console.log(
+        `Generated ${item.fileName}: ${html.length} → ${minifiedHtml.length} bytes`,
+      );
     } catch (error) {
       console.error(`Error minifying ${item.fileName}:`, error);
       fs.writeFileSync(`./public/${item.fileName}`, html, { encoding: "utf8" });
@@ -117,16 +125,24 @@ const buildPages = async () => {
   // Minify HTML for list page
   try {
     const minifiedListHtml = await minifyHtml(listHtml, htmlMinifierOptions);
-    fs.writeFileSync(`./public/${listItem.fileName}`, minifiedListHtml, { encoding: "utf8" });
-    console.log(`Generated ${listItem.fileName}: ${listHtml.length} → ${minifiedListHtml.length} bytes`);
+    fs.writeFileSync(`./public/${listItem.fileName}`, minifiedListHtml, {
+      encoding: "utf8",
+    });
+    console.log(
+      `Generated ${listItem.fileName}: ${listHtml.length} → ${minifiedListHtml.length} bytes`,
+    );
   } catch (error) {
     console.error(`Error minifying ${listItem.fileName}:`, error);
-    fs.writeFileSync(`./public/${listItem.fileName}`, listHtml, { encoding: "utf8" });
+    fs.writeFileSync(`./public/${listItem.fileName}`, listHtml, {
+      encoding: "utf8",
+    });
   }
 };
 
-buildPages().then(() => {
-  console.log("Build completed successfully!");
-}).catch((error) => {
-  console.error("Build failed:", error);
-});
+buildPages()
+  .then(() => {
+    console.log("Build completed successfully!");
+  })
+  .catch((error) => {
+    console.error("Build failed:", error);
+  });
