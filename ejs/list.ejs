@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-langs="en-US,zh-CN">
+  <%- include('lib/head'); %>
+  <body>
+    <header>
+      <main><%= config.statusCode %></main>
+      <description data-i18n="pageText.<%= config.textKey %>">
+        <%= allI18n['en-US'].pageText[config.textKey] %>
+      </description>
+    </header>
+
+    <reason>
+      <explain>
+        <main data-i18n="list.title"><%= allI18n['en-US'].list.title %></main>
+        <p data-i18n="list.description">
+          <%= allI18n['en-US'].list.description %>
+        </p>
+      </explain>
+      <howtodo>
+        <main data-i18n="list.availablePages"><%= allI18n['en-US'].list.availablePages %></main>
+        <div class="page-list">
+          <% config.pages.forEach(function(page) { %>
+            <div class="page-item">
+              <a href="<%= page.fileName %>" class="page-link">
+                <div class="page-code"><%= page.statusCode %></div>
+                <div class="page-text" data-i18n="pageText.<%= page.textKey %>">
+                  <%= allI18n['en-US'].pageText[page.textKey] %>
+                </div>
+              </a>
+            </div>
+          <% }); %>
+        </div>
+      </howtodo>
+    </reason>
+  </body>
+
+  <%- include('lib/footer') -%>
+
+  <none> ::CLOUDFLARE_ERROR_1000S_BOX:: ::CLOUDFLARE_ERROR_500S_BOX:: </none>
+
+  <script>
+    (<%- config.script.toString() %>)()
+  </script>
+</html>

@@ -88,6 +88,41 @@ const buildPages = async () => {
       fs.writeFileSync(`./public/${item.fileName}`, html, { encoding: "utf8" });
     }
   }
+
+  // Generate list.html
+  const listItem = {
+    fileName: "list.html",
+    statusCode: "List",
+    textKey: "list",
+    script: function () {},
+    pages: config.builderConfig, // Pass all pages to the template
+    allI18n: allI18n,
+  };
+
+  let listHtml = ejs.render(
+    fs.readFileSync("./ejs/list.ejs", { encoding: "utf8" }),
+    {
+      config: listItem,
+      i18n: defaultI18n,
+      allI18n: allI18n,
+      helper: {},
+      getStatusKey: config.getStatusKey,
+    },
+    {
+      root: "./ejs/list.ejs",
+      filename: "./ejs/list.ejs",
+    },
+  );
+
+  // Minify HTML for list page
+  try {
+    const minifiedListHtml = await minifyHtml(listHtml, htmlMinifierOptions);
+    fs.writeFileSync(`./public/${listItem.fileName}`, minifiedListHtml, { encoding: "utf8" });
+    console.log(`Generated ${listItem.fileName}: ${listHtml.length} → ${minifiedListHtml.length} bytes`);
+  } catch (error) {
+    console.error(`Error minifying ${listItem.fileName}:`, error);
+    fs.writeFileSync(`./public/${listItem.fileName}`, listHtml, { encoding: "utf8" });
+  }
 };
 
 buildPages().then(() => {

@@ -202,3 +202,49 @@ footer > * {
     --working-with-error-color-background: #392605;
   }
 }
+
+/* List page styles */
+.page-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.page-item {
+  background-color: var(--box-color);
+  border-radius: 9px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-link {
+  display: block;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-code {
+  font-size: 2rem;
+  font-family: var(--code-font-family);
+  font-weight: bold;
+  color: var(--working-color);
+  margin-bottom: 0.5rem;
+}
+
+.page-text {
+  font-size: 1rem;
+  color: var(--font-color-lighter);
+}
+
+@media screen and (max-width: 480px) {
+  .page-list {
+    grid-template-columns: 1fr;
+  }
+}
+
