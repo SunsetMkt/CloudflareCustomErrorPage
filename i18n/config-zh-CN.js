@@ -99,6 +99,14 @@ const i18n = {
     "managed-challenge": "托管质询",
     "interactive-challenge": "交互式质询",
     "js-challenge": "JavaScript 质询",
+    list: "页面列表",
+  },
+
+  // List page translations
+  list: {
+    title: "可用页面",
+    description: "以下是此模板中所有可用错误页面的列表。",
+    availablePages: "页面列表",
   },
 };
 

@@ -106,6 +106,14 @@ const i18n = {
     "managed-challenge": "Managed challenge",
     "interactive-challenge": "Interactive challenge",
     "js-challenge": "JavaScript challenge",
+    list: "Page List",
+  },
+
+  // List page translations
+  list: {
+    title: "Available Pages",
+    description: "Below is a list of all available error pages in this template.",
+    availablePages: "Page List",
   },
 };
 
