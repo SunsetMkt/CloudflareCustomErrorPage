@@ -29,7 +29,7 @@ const i18n = {
     rayIdPost: " ",
     clickToReveal: "Click to reveal",
     notice:
-      "If this issue persists, you may need to enable JavaScript and Cookies.",
+      'If this issue persists, you may need to enable JavaScript and Cookies. The error message in "What happened?" takes precedence over the graphical prompts.',
   },
 
   // Page-specific reason strings
