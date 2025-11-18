@@ -1,6 +1,7 @@
 const i18n = {
   client: "Your Client",
-  edgeNetwork: "Cloudflare Edge Network",
+  edgeNetwork:
+    "<a rel='noopener noreferrer' target='_blank' href='https://www.cloudflarestatus.com/'>Cloudflare Edge Network</a>",
   webServer: "Web Server",
   provider:
     "Running with <a rel='noopener noreferrer' target='_blank' href='https://www.cloudflare.com/5xx-error-landing/'>Cloudflare</a>.",
