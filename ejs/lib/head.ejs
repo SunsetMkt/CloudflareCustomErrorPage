@@ -159,4 +159,35 @@
     document.head.innerHTML += `<link href="https://unpkg.com/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Bold.css" rel="stylesheet">`;
     document.head.innerHTML += `<link href="https://unpkg.com/@fontsource/jetbrains-mono@5.2.8/index.css" rel="stylesheet">`;
   </script>
+  <script>
+    function addScriptTag(src, async, onload) {
+      var scriptElement = document.createElement("script");
+      scriptElement.async = async;
+      scriptElement.src = src;
+      if (onload) {
+        scriptElement.onload = onload;
+      }
+      var firstScriptElement = document.getElementsByTagName("script")[0];
+      firstScriptElement.parentNode.insertBefore(
+        scriptElement,
+        firstScriptElement,
+      );
+    }
+
+    var erudaLaunched = false;
+    function launchEruda() {
+      if (erudaLaunched) {
+        return;
+      }
+      erudaLaunched = true;
+
+      addScriptTag("//unpkg.com/eruda@latest/eruda.js", false, function () {
+        eruda.init();
+        console.info(
+          "[launchEruda]",
+          "Console output before launch is not recorded",
+        );
+      });
+    }
+  </script>
 </head>
