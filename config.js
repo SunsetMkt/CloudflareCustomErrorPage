@@ -210,6 +210,14 @@ exports.builderConfig = [
     script: function () {},
   },
   {
+    fileName: "non-interactive-challenge.html",
+    statusCode: 403,
+    textKey: "non-interactive-challenge",
+    cardType: "underAttack",
+    reasonKey: "non-interactive-challenge",
+    script: function () {},
+  },
+  {
     fileName: "js-challenge.html",
     statusCode: 403,
     textKey: "js-challenge",

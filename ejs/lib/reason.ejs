@@ -13,7 +13,9 @@
     <p data-i18n="reasons.<%= config.reasonKey %>.howtodo">
       <%- allI18n['en-US'].reasons[config.reasonKey].howtodo %>
     </p>
-    <% if (config.statusCode === 403) { %>
+    <% if (config.reasonKey === "non-interactive-challenge") { %>
+    <div class="challenge-container">::IM_UNDER_ATTACK_BOX::</div>
+    <% } else if (config.statusCode === 403) { %>
     <div class="challenge-container">::CAPTCHA_BOX::</div>
     <% } %>
   </howtodo>
