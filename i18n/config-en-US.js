@@ -85,6 +85,11 @@ const i18n = {
       explain: "Complete an interactive challenge to continue.",
       howtodo: "Solve the challenge presented below to access the website.",
     },
+    "non-interactive-challenge": {
+      explain:
+        "This website is using a non-interactive challenge to protect itself from online attacks.",
+      howtodo: "Please wait while we verify your browser.",
+    },
     "js-challenge": {
       explain:
         "This website is using a security service to protect itself from online attacks.",
@@ -106,6 +111,7 @@ const i18n = {
     "challenge-country": "Country challenge",
     "managed-challenge": "Managed challenge",
     "interactive-challenge": "Interactive challenge",
+    "non-interactive-challenge": "Non-interactive challenge",
     "js-challenge": "JavaScript challenge",
     list: "Page List",
   },

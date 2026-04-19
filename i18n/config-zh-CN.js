@@ -81,6 +81,10 @@ const i18n = {
       explain: "完成交互式验证以继续访问。",
       howtodo: "解决下方的质询以访问网站。",
     },
+    "non-interactive-challenge": {
+      explain: "该网站正在使用非交互式质询保护自身免受在线攻击。",
+      howtodo: "请等待我们验证您的浏览器。",
+    },
     "js-challenge": {
       explain: "该网站正在使用安全服务保护自身免受在线攻击。",
       howtodo: "请启用 JavaScript 并等待我们验证您的浏览器。",
@@ -100,6 +104,7 @@ const i18n = {
     "challenge-country": "国家质询",
     "managed-challenge": "托管质询",
     "interactive-challenge": "交互式质询",
+    "non-interactive-challenge": "非交互式质询",
     "js-challenge": "JavaScript 质询",
     list: "页面列表",
   },
